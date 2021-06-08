@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView15"
+        android:id="@+id/menuButton2"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -79,7 +79,7 @@
         app:srcCompat="@drawable/_5587" />
 
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/addMedButton"
         android:layout_width="115dp"
         android:layout_height="61dp"
         android:layout_marginBottom="32dp"

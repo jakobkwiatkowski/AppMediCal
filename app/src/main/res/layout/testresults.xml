@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView24"
+        android:id="@+id/menuButton3"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -38,25 +38,29 @@
         app:srcCompat="@drawable/ic_baseline_menu_24" />
 
     <Button
+        android:id="@+id/button17"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="Dodaj zdjęcie"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.919" />
+
+    <Button
 
         android:id="@+id/button16"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="260dp"
         android:text="Wybierz zdjęcie"
+        app:layout_constraintBottom_toBottomOf="@+id/button17"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button17"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="280dp"
-        android:text="Dodaj zdjęcie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.819" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
