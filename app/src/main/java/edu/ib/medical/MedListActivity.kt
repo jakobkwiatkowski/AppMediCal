@@ -23,7 +23,7 @@ class MedListActivity : AppCompatActivity() {
     private fun goAddMed(){
         val addMedButton = findViewById<Button>(R.id.addMedButton)
         addMedButton.setOnClickListener {
-            val intent = Intent(this, AddDocActivity::class.java)
+            val intent = Intent(this, AddMedActivity::class.java)
             startActivity(intent)
         }
     }
