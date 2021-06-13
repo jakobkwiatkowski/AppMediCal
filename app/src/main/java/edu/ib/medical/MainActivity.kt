@@ -11,12 +11,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         goMenu()
+        goAddMed()
     }
 
     private fun goMenu() {
         val menuButton = findViewById<ImageView>(R.id.menuButton)
         menuButton.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun goAddMed(){
+        val addMedButton = findViewById<Button>(R.id.addMedButton2)
+        addMedButton.setOnClickListener {
+            val intent = Intent(this, AddMedActivity::class.java)
             startActivity(intent)
         }
     }
