@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,6 +15,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         goMenu()
         goAddMed()
+        addData()
+
+
     }
 
     private fun goMenu() {
@@ -29,4 +35,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    private fun addData(){
+
+        val data: TextView = findViewById(R.id.Data)
+        val kalendarz: Calendar = Calendar.getInstance()
+        val format: SimpleDateFormat =  SimpleDateFormat("dd-MM-yyyy")
+        val wyswietl = format.format(kalendarz.getTime())
+        data.setText(wyswietl)
+    }
+
+
+
 }
