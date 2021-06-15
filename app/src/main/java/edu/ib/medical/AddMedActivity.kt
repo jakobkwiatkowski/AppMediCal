@@ -4,10 +4,14 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.View
 import android.widget.*
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
+
+
 
 
 class AddMedActivity : AppCompatActivity() {
@@ -17,6 +21,8 @@ class AddMedActivity : AppCompatActivity() {
         addPrzypomnienie()
         addIle_razy()
         addCzestotliowsc()
+        addData()
+        addGodzina()
         addTermin()
         addCzas()
     }
@@ -63,7 +69,23 @@ class AddMedActivity : AppCompatActivity() {
 
         }
     }
+    private fun addData(){
 
+        val data: TextView = findViewById(R.id.wybierzdate)
+        val kalendarz: Calendar = Calendar.getInstance()
+        val format: SimpleDateFormat =  SimpleDateFormat("dd-MM-yyyy")
+        val wyswietl = format.format(kalendarz.getTime())
+        data.setText(wyswietl)
+    }
+
+    private fun addGodzina(){
+
+        val godzina: TextView = findViewById(R.id.wybierzgodzine)
+        val kalendarz: Calendar = Calendar.getInstance()
+        val format: SimpleDateFormat =  SimpleDateFormat("HH:mm")
+        val wyswietl = format.format(kalendarz.getTime())
+        godzina.setText(wyswietl)
+    }
 
     private fun addTermin() {
 
