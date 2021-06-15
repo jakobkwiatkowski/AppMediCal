@@ -4,11 +4,15 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.View
 import android.widget.*
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
 import android.content.Intent
+
+
 
 
 class AddMedActivity : AppCompatActivity() {
@@ -19,6 +23,8 @@ class AddMedActivity : AppCompatActivity() {
         addPrzypomnienie()
         addIle_razy()
         addCzestotliowsc()
+        addData()
+        addGodzina()
         addTermin()
         addCzas()
         goMenu()
@@ -73,30 +79,47 @@ class AddMedActivity : AppCompatActivity() {
 
         }
     }
+    private fun addData(){
 
+        val data: TextView = findViewById(R.id.wybierzdate)
+        val kalendarz: Calendar = Calendar.getInstance()
+        val format: SimpleDateFormat =  SimpleDateFormat("dd-MM-yyyy")
+        val wyswietl = format.format(kalendarz.getTime())
+        data.setText(wyswietl)
+    }
+
+    private fun addGodzina(){
+
+        val godzina: TextView = findViewById(R.id.wybierzgodzine)
+        val kalendarz: Calendar = Calendar.getInstance()
+        val format: SimpleDateFormat =  SimpleDateFormat("HH:mm")
+        val wyswietl = format.format(kalendarz.getTime())
+        godzina.setText(wyswietl)
+    }
 
     private fun addTermin() {
 
         val kalendarz = Calendar.getInstance()
-
-
-        val rok = kalendarz.get(Calendar.YEAR)
-        val miesiac = kalendarz.get(Calendar.MONTH)
-        val dzien = kalendarz.get(Calendar.DAY_OF_MONTH)
         val wybierzdate: TextView = findViewById(R.id.wybierzdate)
 
         val kiedy: Button = findViewById(R.id.terminbtn)
 
         kiedy.setOnClickListener {
-            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+            val dpd = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                kalendarz.set(Calendar.YEAR, year)
+                kalendarz.set(Calendar.MONTH, month)
+                kalendarz.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                wybierzdate.text = SimpleDateFormat("dd-MM-yyy").format(kalendarz.time)
 
-                wybierzdate.setText("" + mDay + "/" + mMonth + "/" + mYear)
-
-            }, rok, miesiac, dzien)
-            dpd.show()
+            }
+            DatePickerDialog(this, dpd, kalendarz.get(Calendar.YEAR), kalendarz.get(Calendar.MONTH), kalendarz.get(Calendar.DAY_OF_MONTH)).show()
         }
 
     }
+
+
+
+
 
 
     private fun addCzas() {
