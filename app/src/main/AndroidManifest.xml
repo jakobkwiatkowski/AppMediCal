@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="edu.ib.medical">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -9,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MediCal">
-        <activity android:name=".AddMedActivity"></activity>
+        <activity android:name=".testTRY"></activity>
+        <activity android:name=".AddMedActivity" />
         <activity android:name=".AddDocActivity" />
         <activity android:name=".DocListActivity" />
         <activity android:name=".TestResultsActivity" />

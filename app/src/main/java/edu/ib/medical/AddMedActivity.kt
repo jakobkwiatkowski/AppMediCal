@@ -8,17 +8,27 @@ import android.view.View
 import android.widget.*
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.Intent
 
 
 class AddMedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.addmed)
+
         addPrzypomnienie()
         addIle_razy()
         addCzestotliowsc()
         addTermin()
         addCzas()
+        goMenu()
+    }
+    private fun goMenu() {
+        val menuButton = findViewById<ImageView>(R.id.menuButton6)
+        menuButton.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun addPrzypomnienie() {
