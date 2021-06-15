@@ -68,25 +68,26 @@ class AddMedActivity : AppCompatActivity() {
     private fun addTermin() {
 
         val kalendarz = Calendar.getInstance()
-
-
-        val rok = kalendarz.get(Calendar.YEAR)
-        val miesiac = kalendarz.get(Calendar.MONTH)
-        val dzien = kalendarz.get(Calendar.DAY_OF_MONTH)
         val wybierzdate: TextView = findViewById(R.id.wybierzdate)
 
         val kiedy: Button = findViewById(R.id.terminbtn)
 
         kiedy.setOnClickListener {
-            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+            val dpd = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                kalendarz.set(Calendar.YEAR, year)
+                kalendarz.set(Calendar.MONTH, month)
+                kalendarz.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                wybierzdate.text = SimpleDateFormat("dd-MM-yyy").format(kalendarz.time)
 
-                wybierzdate.setText("" + mDay + "/" + mMonth + "/" + mYear)
-
-            }, rok, miesiac, dzien)
-            dpd.show()
+            }
+            DatePickerDialog(this, dpd, kalendarz.get(Calendar.YEAR), kalendarz.get(Calendar.MONTH), kalendarz.get(Calendar.DAY_OF_MONTH)).show()
         }
 
     }
+
+
+
+
 
 
     private fun addCzas() {
