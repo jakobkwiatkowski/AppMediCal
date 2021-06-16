@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Spinner
-        android:id="@+id/spinner5"
+        android:id="@+id/koniec_leku"
         android:layout_width="140dp"
         android:layout_height="35dp"
         android:layout_marginTop="500dp"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/zapas"
         android:layout_width="140dp"
         android:layout_height="39dp"
         android:layout_marginTop="448dp"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/ile_razy"
         android:layout_width="140dp"
         android:layout_height="35dp"
         android:layout_marginTop="275dp"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/czestotliwosc"
         android:layout_width="140dp"
         android:layout_height="35dp"
         android:layout_marginTop="225dp"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/dawka"
         android:layout_width="140dp"
         android:layout_height="39dp"
         android:layout_marginTop="120dp"
@@ -156,7 +156,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/nazwa_leku"
         android:layout_width="140dp"
         android:layout_height="39dp"
         android:layout_marginTop="72dp"
@@ -177,7 +177,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/zapisz"
         android:layout_width="90dp"
         android:layout_height="45dp"
         android:layout_marginBottom="32dp"

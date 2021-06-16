@@ -2,13 +2,15 @@ package edu.ib.medical
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.ContentValues
+import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.SystemClock
 import android.view.View
 import android.widget.*
 import java.text.SimpleDateFormat
-import java.time.LocalTime
+
 import java.util.*
 
 
@@ -25,10 +27,11 @@ class AddMedActivity : AppCompatActivity() {
         addGodzina()
         addTermin()
         addCzas()
+        Baza()
     }
 
     private fun addPrzypomnienie() {
-        val spinner5: Spinner = findViewById(R.id.spinner5)
+        val spinner5: Spinner = findViewById(R.id.koniec_leku)
 
         val przypomnienie = arrayOf("2 dni przed końcem", "3 dni przed końcem", "4 dni przed końcem", "5 dni przed końcem", "6 dni przed końcem", "7 dni przed końcem")
         val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, przypomnienie)
@@ -43,7 +46,7 @@ class AddMedActivity : AppCompatActivity() {
 
     private fun addIle_razy() {
 
-        val spinner3: Spinner = findViewById(R.id.spinner3)
+        val spinner3: Spinner = findViewById(R.id.ile_razy)
         val ile_razy = arrayOf("1", "2", "3", "4", "5")
         val arrayAdapter3 = ArrayAdapter(this, android.R.layout.simple_spinner_item, ile_razy)
 
@@ -57,7 +60,7 @@ class AddMedActivity : AppCompatActivity() {
 
     private fun addCzestotliowsc() {
 
-        val spinner2: Spinner = findViewById(R.id.spinner2)
+        val spinner2: Spinner = findViewById(R.id.czestotliwosc)
         val czestotliwosc = arrayOf("codziennie", "co 2 dni", "co 3 dni", "co 4 dni", "co 5 dni", "co 6 dni", "co tydzień", "co 2 tygodnie", "co miesiąc")
         val arrayAdapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, czestotliwosc)
 
@@ -108,10 +111,6 @@ class AddMedActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
     private fun addCzas() {
 
         val kalendarz = Calendar.getInstance()
@@ -134,6 +133,48 @@ class AddMedActivity : AppCompatActivity() {
 
     }
 
+    fun Baza(){
+
+
+        val nazwa_leku: TextView = findViewById(R.id.nazwa_leku)
+        val dawka_leku: TextView = findViewById(R.id.dawka)
+        val data:TextView = findViewById(R.id.wybierzdate)
+        val czestotliwosc: Spinner= findViewById(R.id.czestotliwosc)
+        val ile_razy:Spinner = findViewById(R.id.ile_razy)
+        val godzina:TextView=findViewById(R.id.wybierzgodzine)
+        val przypomnienie:TextView = findViewById(R.id.switch1)
+        val zapas:TextView = findViewById(R.id.zapas)
+        val koniec_leku:Spinner = findViewById(R.id.koniec_leku)
+
+        val save = findViewById<Button>(R.id.zapisz)
+        save.setOnClickListener{
+                val myDB: MyDataBaseHelper= MyDataBaseHelper(this)
+                myDB.addLek(nazwa_leku.getText().toString().trim(),
+                    dawka_leku.getText().toString().trim(),
+                        data.getText().toString().trim(),
+                        czestotliwosc.getSelectedItem().toString().trim(),
+                        ile_razy.getSelectedItem().toString().trim(),
+                        godzina.getText().toString().trim(),
+                        przypomnienie.getText().toString().trim(),
+                        zapas.getText().toString().trim(),
+                        koniec_leku.getSelectedItem().toString().trim()
+
+
+
+                )
+
+
+
+
+
+
+
+
+        }
+    }
 
 
 }
+
+
+
