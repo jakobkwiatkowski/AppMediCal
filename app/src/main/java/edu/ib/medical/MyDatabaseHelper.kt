@@ -5,9 +5,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.BaseColumns
-import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 
 
@@ -76,7 +73,7 @@ class MyDataBaseHelper(val context: Context): SQLiteOpenHelper(context, DATABASE
     }
 
     fun readAllData(): Cursor{
-        val query = "SELECTED + FROM" + TABLE_NAME
+        val query = "SELECTED * FROM" + TABLE_NAME
         val db = this.readableDatabase
 
         val cursor: Cursor = db.rawQuery(query, null);
