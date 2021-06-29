@@ -46,20 +46,20 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
         onCreate(db)
     }
 
-    fun addLek(std:LekModel):Long{
+    fun addLek(lek:LekModel):Long{
         val db: SQLiteDatabase = this.writableDatabase
         val cv = ContentValues()
 
-//        cv.put(ID, std.id)
-        cv.put(NazwaLeku, std.nazwa)
-        cv.put(Dawka, std.dawka)
-        cv.put(DataRozpoczecia, std.data)
-        cv.put(Czestotliwosc, std.czestotliwosc)
-        cv.put(IleRazy, std.ileRazy)
-        cv.put(Godzina, std.godzina)
-//        cv.put(Przypomnienie, std.przypomnienie)
-        cv.put(ZapasTabletek, std.zapas)
-        cv.put(KoniecLeku, std.koniec)
+//        cv.put(ID, lek.id)
+        cv.put(NazwaLeku, lek.nazwa)
+        cv.put(Dawka, lek.dawka)
+        cv.put(DataRozpoczecia, lek.data)
+        cv.put(Czestotliwosc, lek.czestotliwosc)
+        cv.put(IleRazy, lek.ileRazy)
+        cv.put(Godzina, lek.godzina)
+//        cv.put(Przypomnienie, lek.przypomnienie)
+        cv.put(ZapasTabletek, lek.zapas)
+        cv.put(KoniecLeku, lek.koniec)
 
         val succes = db.insert(TABLE_NAME, null, cv)
         db.close()
@@ -68,7 +68,7 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
 
     fun getAllLeki(): ArrayList<LekModel>{
 
-        val stdList: ArrayList<LekModel> = ArrayList()
+        val lekList: ArrayList<LekModel> = ArrayList()
         val selectQuery = "SELECT * FROM $TABLE_NAME"
         val db = this.readableDatabase
 
@@ -108,30 +108,29 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
                 zapas = cursor.getString(cursor.getColumnIndex("zapas_tabletek"))
                 koniec = cursor.getString(cursor.getColumnIndex("koniec"))
 
-                val std = LekModel(id =id, nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc, ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec)
-                stdList.add(std)
+                val lek = LekModel(id =id, nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc, ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec)
+                lekList.add(lek)
             }while (cursor.moveToNext())
         }
-        return stdList
+        return lekList
     }
 
 
-    fun updateLek(std:LekModel): Int{
+    fun updateLek(lek:LekModel): Int{
         val db = this.writableDatabase
 
         val cv = ContentValues()
-//        cv.put(ID, std.id)
-        cv.put(NazwaLeku, std.nazwa)
-        cv.put(Dawka, std.dawka)
-        cv.put(DataRozpoczecia, std.data)
-        cv.put(Czestotliwosc, std.czestotliwosc)
-        cv.put(IleRazy, std.ileRazy)
-        cv.put(Godzina, std.godzina)
-//        cv.put(Przypomnienie, std.przypomnienie)
-        cv.put(ZapasTabletek, std.zapas)
-        cv.put(KoniecLeku, std.koniec)
+//        cv.put(ID, lek.id)
+        cv.put(NazwaLeku, lek.nazwa)
+        cv.put(Dawka, lek.dawka)
+        cv.put(DataRozpoczecia, lek.data)
+        cv.put(Czestotliwosc, lek.czestotliwosc)
+        cv.put(IleRazy, lek.ileRazy)
+        cv.put(Godzina, lek.godzina)
+        cv.put(ZapasTabletek, lek.zapas)
+        cv.put(KoniecLeku, lek.koniec)
 
-        val success = db.update(TABLE_NAME, cv, "id=" + std.id, null)
+        val success = db.update(TABLE_NAME, cv, "id=" + lek.id, null)
         db.close()
         return success
 

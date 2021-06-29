@@ -32,7 +32,7 @@ class AddMedActivity : AppCompatActivity() {
     private lateinit var sqliteHelper: MyDataBaseHelper
 
     private  var adapter: LekAdapter? = null
-    private var std: LekModel? = null
+    private var lek: LekModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +62,7 @@ class AddMedActivity : AppCompatActivity() {
             edGodzina.setText(it.godzina)
             edZapas.setText(it.zapas)
             edKoniec.setText(it.koniec)
-            std = it
+            lek = it
         }
 
         adapter?.setOnClickUpdateItem {
@@ -99,7 +99,7 @@ class AddMedActivity : AppCompatActivity() {
 
         val rezultat = findViewById<TextView>(R.id.ile_razy)
         val spinner3: Spinner = findViewById(R.id.ile)
-        val ile_razy = arrayOf("Ile razy dziennie:", "1", "2", "3", "4", "5")
+        val ile_razy = arrayOf("1", "2", "3", "4", "5")
         val arrayAdapter3 = ArrayAdapter(this, android.R.layout.simple_spinner_item, ile_razy)
 
         spinner3.adapter = arrayAdapter3
@@ -212,10 +212,10 @@ class AddMedActivity : AppCompatActivity() {
 
             Toast.makeText(this, "Proszę wypełnić wszystkie pola", Toast.LENGTH_SHORT).show()
         } else {
-            val std = LekModel(1,  nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
+            val lek = LekModel(1,  nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
                     ileRazy = ileRazy, godzina = godzina,  zapas = zapas, koniec = koniec)
 
-            val status = sqliteHelper.addLek(std)
+            val status = sqliteHelper.addLek(lek)
 
             if (status > -1) {
                 Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show()
@@ -239,18 +239,18 @@ class AddMedActivity : AppCompatActivity() {
         val zapas = edZapas.text.toString()
         val koniec = edKoniec.text.toString()
 
-        if (nazwa == std?.nazwa && dawka == std?.dawka && data == std?.data && czestotliwosc == std?.czestotliwosc.toString()
-                && ileRazy == std?.ileRazy.toString() && godzina == std?.godzina
-                && zapas == std?.zapas && koniec == std?.koniec.toString()){
+        if (nazwa == lek?.nazwa && dawka == lek?.dawka && data ==lek?.data && czestotliwosc == lek?.czestotliwosc.toString()
+                && ileRazy == lek?.ileRazy.toString() && godzina == lek?.godzina
+                && zapas == lek?.zapas && koniec == lek?.koniec.toString()){
 
             Toast.makeText(this, "Dane nie zostały zmienione", Toast.LENGTH_SHORT).show()
             return
         }
-        if (std == null) return
-        val std = LekModel(id = std!!.id,  nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
+        if (lek == null) return
+        val lek = LekModel(id = lek!!.id,  nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
                 ileRazy = ileRazy, godzina = godzina,  zapas = zapas, koniec = koniec)
 
-        val status = sqliteHelper.updateLek(std)
+        val status = sqliteHelper.updateLek(lek)
         if (status>-1){
             clearEditText()
 
@@ -259,13 +259,6 @@ class AddMedActivity : AppCompatActivity() {
         }
     }
 
-//    private fun getLek(){
-//        val stdList = sqliteHelper.getAllLeki()
-//        Log.e("pppp", "${stdList.size}")
-//
-//        //Wyświetlanie danych w RecyclerView
-//        adapter?.addItems(stdList)
-//    }
 
 
 

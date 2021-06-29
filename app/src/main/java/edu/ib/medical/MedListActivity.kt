@@ -19,7 +19,7 @@ class MedListActivity : AppCompatActivity() {
     private lateinit var sqliteHelper: MyDataBaseHelper
     private lateinit var recyclerView: RecyclerView
     private  var adapter: LekAdapter? = null
-    private var std: LekModel? = null
+    private var lek: LekModel? = null
 
     private lateinit var btnView:Button
 
@@ -70,11 +70,11 @@ class MedListActivity : AppCompatActivity() {
 
 
     private fun getLek(){
-        val stdList = sqliteHelper.getAllLeki()
-        Log.e("pppp", "${stdList.size}")
+        val lekList = sqliteHelper.getAllLeki()
+        Log.e("pppp", "${lekList.size}")
 
         //Wyświetlanie danych w RecyclerView
-        adapter?.addItems(stdList)
+        adapter?.addItems(lekList)
     }
 
 

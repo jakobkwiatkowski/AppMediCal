@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 class LekAdapter: RecyclerView.Adapter<LekAdapter.LekViewHolder>(){
 
-    private var stdList: ArrayList<LekModel> = ArrayList()
+    private var lekList: ArrayList<LekModel> = ArrayList()
     private var onClickItem:((LekModel) ->Unit)? = null
     private var onClickDeleteItem:((LekModel) ->Unit)? = null
     private var onClickUpdateItem:((LekModel) ->Unit)? = null
 
     fun addItems(items: ArrayList<LekModel>) {
-        this.stdList = items
+        this.lekList = items
         notifyDataSetChanged()
     }
 
@@ -39,16 +39,16 @@ class LekAdapter: RecyclerView.Adapter<LekAdapter.LekViewHolder>(){
 
 
     override fun onBindViewHolder(holder: LekViewHolder, position: Int) {
-        val std = stdList[position]
-        holder.bindView(std)
-        holder.itemView.setOnClickListener {onClickItem?.invoke(std)}
-        holder.btnDelete.setOnClickListener {onClickDeleteItem?.invoke(std)}
-        holder.btnUpdate.setOnClickListener{onClickUpdateItem?.invoke(std)}
+        val lek = lekList[position]
+        holder.bindView(lek)
+        holder.itemView.setOnClickListener {onClickItem?.invoke(lek)}
+        holder.btnDelete.setOnClickListener {onClickDeleteItem?.invoke(lek)}
+        holder.btnUpdate.setOnClickListener{onClickUpdateItem?.invoke(lek)}
 
     }
 
     override fun getItemCount(): Int {
-        return stdList.size
+        return lekList.size
     }
 
 
@@ -61,23 +61,22 @@ class LekAdapter: RecyclerView.Adapter<LekAdapter.LekViewHolder>(){
         private var czestotliwosc =  view.findViewById<TextView>(R.id.czestotliwosc_txt)
         private var ileRazy =  view.findViewById<TextView>(R.id.ile_razy_txt)
         private var godzina =  view.findViewById<TextView>(R.id.godzina_txt)
-//        private var przypomnienie = view.findViewById<TextView>(R.id.przypomnij_txt)
         private var zapas =  view.findViewById<TextView>(R.id.zapas_tabletek_txt)
         private var koniec = view.findViewById<TextView>(R.id.koniec_leku_txt)
          var btnDelete = view.findViewById<ImageButton>(R.id.usun)
          var btnUpdate = view.findViewById<ImageButton>(R.id.zmien)
 
 
-        fun bindView(std:LekModel) {
-            id.text = std.id.toString()
-            nazwa.text = std.nazwa
-            dawka.text = std.dawka
-            data.text = std.data
-            czestotliwosc.text = std.czestotliwosc
-            ileRazy.text = std.ileRazy
-            godzina.text = std.godzina
-            zapas.text = std.zapas
-            koniec.text = std.koniec
+        fun bindView(lek:LekModel) {
+            id.text = lek.id.toString()
+            nazwa.text = lek.nazwa
+            dawka.text = lek.dawka
+            data.text = lek.data
+            czestotliwosc.text = lek.czestotliwosc
+            ileRazy.text = lek.ileRazy
+            godzina.text = lek.godzina
+            zapas.text = lek.zapas
+            koniec.text = lek.koniec
 
         }
 
