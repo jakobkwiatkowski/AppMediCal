@@ -12,7 +12,8 @@
         <activity
             android:name=".AddMedActivity"
             android:parentActivityName=".MedListActivity"></activity>
-        <activity android:name=".AddDocActivity" />
+        <activity android:name=".AddDocActivity"
+            android:parentActivityName=".DocListActivity"> </activity>
         <activity android:name=".DocListActivity" />
         <activity android:name=".TestResultsActivity" />
         <activity android:name=".GenerateReport" />

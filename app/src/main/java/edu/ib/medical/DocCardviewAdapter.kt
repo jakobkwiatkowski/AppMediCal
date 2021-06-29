@@ -33,7 +33,7 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DocViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.card_view, parent, false )
+        LayoutInflater.from(parent.context).inflate(R.layout.doc_cardview, parent, false )
     )
 
     override fun onBindViewHolder(holder: DocViewHolder, position: Int) {

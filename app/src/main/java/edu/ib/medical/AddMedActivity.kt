@@ -71,58 +71,42 @@ class AddMedActivity : AppCompatActivity() {
     }
 
 
+
     private fun addPrzypomnienie() {
 
 
         val rezultat = findViewById<TextView>(R.id.koniec_leku)
         val spinner5: Spinner = findViewById(R.id.przypomnij)
 
-        val przypomnienie = arrayOf(
-            "Przypomnij:",
-            "2 dni przed końcem",
-            "3 dni przed końcem",
-            "4 dni przed końcem",
-            "5 dni przed końcem",
-            "6 dni przed końcem",
-            "7 dni przed końcem"
-        )
+        val przypomnienie = arrayOf("2 dni przed końcem", "3 dni przed końcem", "4 dni przed końcem", "5 dni przed końcem", "6 dni przed końcem", "7 dni przed końcem")
         val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, przypomnienie)
 
         spinner5.adapter = arrayAdapter
         spinner5.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 rezultat.text = przypomnienie[position]
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
+
+
+
 
 
     private fun addIle_razy() {
 
         val rezultat = findViewById<TextView>(R.id.ile_razy)
         val spinner3: Spinner = findViewById(R.id.ile)
-        val ile_razy = arrayOf("1", "2", "3", "4", "5")
+        val ile_razy = arrayOf("raz dziennie", "2 razy dziennie", "3 razy dziennie", "4 razy dziennie", "5 razy dziennie")
         val arrayAdapter3 = ArrayAdapter(this, android.R.layout.simple_spinner_item, ile_razy)
 
         spinner3.adapter = arrayAdapter3
         spinner3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 rezultat.text = ile_razy[position]
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
@@ -131,33 +115,16 @@ class AddMedActivity : AppCompatActivity() {
 
         val rezultat = findViewById<TextView>(R.id.czestotliwosc)
         val spinner2: Spinner = findViewById(R.id.czesto)
-        val czestotliwosc = arrayOf(
-            "Jak często:",
-            "codziennie",
-            "co 2 dni",
-            "co 3 dni",
-            "co 4 dni",
-            "co 5 dni",
-            "co 6 dni",
-            "co tydzień",
-            "co 2 tygodnie",
-            "co miesiąc"
-        )
+        val czestotliwosc = arrayOf("codziennie", "co 2 dni", "co 3 dni", "co 4 dni", "co 5 dni", "co 6 dni", "co tydzień", "co 2 tygodnie", "co miesiąc")
         val arrayAdapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, czestotliwosc)
 
         spinner2.adapter = arrayAdapter2
         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
                 rezultat.text = czestotliwosc[position]
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
         }
