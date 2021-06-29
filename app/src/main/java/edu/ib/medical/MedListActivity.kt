@@ -15,13 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 class MedListActivity : AppCompatActivity() {
 
 
-
     private lateinit var sqliteHelper: MyDataBaseHelper
     private lateinit var recyclerView: RecyclerView
-    private  var adapter: LekAdapter? = null
+    private var adapter: LekAdapter? = null
     private var lek: LekModel? = null
 
-    private lateinit var btnView:Button
+    private lateinit var btnView: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,11 +42,7 @@ class MedListActivity : AppCompatActivity() {
         }
 
 
-
-
-
     }
-
 
 
     private fun goMenu() {
@@ -59,7 +54,7 @@ class MedListActivity : AppCompatActivity() {
     }
 
 
-    private fun goAddMed(){
+    private fun goAddMed() {
         val addMedButton = findViewById<Button>(R.id.addMedButton)
         addMedButton.setOnClickListener {
             val intent = Intent(this, AddMedActivity::class.java)
@@ -68,8 +63,7 @@ class MedListActivity : AppCompatActivity() {
     }
 
 
-
-    private fun getLek(){
+    private fun getLek() {
         val lekList = sqliteHelper.getAllLeki()
         Log.e("pppp", "${lekList.size}")
 
@@ -78,20 +72,18 @@ class MedListActivity : AppCompatActivity() {
     }
 
 
-
-
-    private fun deleteLek(id:Int){
+    private fun deleteLek(id: Int) {
 
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Czy na pewno chcesz usunąć ten lek?")
         builder.setCancelable(true)
-        builder.setPositiveButton("Tak"){ dialog, _ ->
+        builder.setPositiveButton("Tak") { dialog, _ ->
             sqliteHelper.deleteLekById(id)
             getLek()
             dialog.dismiss()
 
         }
-        builder.setNegativeButton("Nie") {dialog, _ ->
+        builder.setNegativeButton("Nie") { dialog, _ ->
             dialog.dismiss()
         }
         val alert = builder.create()
@@ -99,8 +91,7 @@ class MedListActivity : AppCompatActivity() {
     }
 
 
-
-    private fun initRecyclerVew(){
+    private fun initRecyclerVew() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = LekAdapter()
         recyclerView.adapter = adapter
@@ -112,11 +103,6 @@ class MedListActivity : AppCompatActivity() {
 
 
     }
-
-
-
-
-
 
 
 }

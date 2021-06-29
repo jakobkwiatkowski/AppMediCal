@@ -12,8 +12,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-
-
 class AddMedActivity : AppCompatActivity() {
 
 
@@ -31,7 +29,7 @@ class AddMedActivity : AppCompatActivity() {
 
     private lateinit var sqliteHelper: MyDataBaseHelper
 
-    private  var adapter: LekAdapter? = null
+    private var adapter: LekAdapter? = null
     private var lek: LekModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,20 +77,31 @@ class AddMedActivity : AppCompatActivity() {
         val rezultat = findViewById<TextView>(R.id.koniec_leku)
         val spinner5: Spinner = findViewById(R.id.przypomnij)
 
-        val przypomnienie = arrayOf("Przypomnij:", "2 dni przed końcem", "3 dni przed końcem", "4 dni przed końcem", "5 dni przed końcem", "6 dni przed końcem", "7 dni przed końcem")
+        val przypomnienie = arrayOf(
+            "Przypomnij:",
+            "2 dni przed końcem",
+            "3 dni przed końcem",
+            "4 dni przed końcem",
+            "5 dni przed końcem",
+            "6 dni przed końcem",
+            "7 dni przed końcem"
+        )
         val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, przypomnienie)
 
         spinner5.adapter = arrayAdapter
         spinner5.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 rezultat.text = przypomnienie[position]
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
-
-
-
 
 
     private fun addIle_razy() {
@@ -105,9 +114,15 @@ class AddMedActivity : AppCompatActivity() {
         spinner3.adapter = arrayAdapter3
         spinner3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 rezultat.text = ile_razy[position]
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
@@ -116,36 +131,53 @@ class AddMedActivity : AppCompatActivity() {
 
         val rezultat = findViewById<TextView>(R.id.czestotliwosc)
         val spinner2: Spinner = findViewById(R.id.czesto)
-        val czestotliwosc = arrayOf("Jak często:", "codziennie", "co 2 dni", "co 3 dni", "co 4 dni", "co 5 dni", "co 6 dni", "co tydzień", "co 2 tygodnie", "co miesiąc")
+        val czestotliwosc = arrayOf(
+            "Jak często:",
+            "codziennie",
+            "co 2 dni",
+            "co 3 dni",
+            "co 4 dni",
+            "co 5 dni",
+            "co 6 dni",
+            "co tydzień",
+            "co 2 tygodnie",
+            "co miesiąc"
+        )
         val arrayAdapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, czestotliwosc)
 
         spinner2.adapter = arrayAdapter2
         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
 
                 rezultat.text = czestotliwosc[position]
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
         }
     }
 
 
-    private fun addData(){
+    private fun addData() {
 
         val data: TextView = findViewById(R.id.wybierzdate)
         val kalendarz: Calendar = Calendar.getInstance()
-        val format: SimpleDateFormat =  SimpleDateFormat("dd-MM-yyyy")
+        val format: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
         val wyswietl = format.format(kalendarz.getTime())
         data.setText(wyswietl)
     }
 
-    private fun addGodzina(){
+    private fun addGodzina() {
 
         val godzina: TextView = findViewById(R.id.wybierzgodzine)
         val kalendarz: Calendar = Calendar.getInstance()
-        val format: SimpleDateFormat =  SimpleDateFormat("HH:mm")
+        val format: SimpleDateFormat = SimpleDateFormat("HH:mm")
         val wyswietl = format.format(kalendarz.getTime())
         godzina.setText(wyswietl)
     }
@@ -165,7 +197,13 @@ class AddMedActivity : AppCompatActivity() {
                 wybierzdate.text = SimpleDateFormat("dd-MM-yyy").format(kalendarz.time)
 
             }
-            DatePickerDialog(this, dpd, kalendarz.get(Calendar.YEAR), kalendarz.get(Calendar.MONTH), kalendarz.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(
+                this,
+                dpd,
+                kalendarz.get(Calendar.YEAR),
+                kalendarz.get(Calendar.MONTH),
+                kalendarz.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
     }
@@ -188,7 +226,13 @@ class AddMedActivity : AppCompatActivity() {
                 wybierzczas.text = SimpleDateFormat("HH:mm").format(kalendarz.time)
             }
 
-            TimePickerDialog(this, dpd2, kalendarz.get(Calendar.HOUR_OF_DAY), kalendarz.get(Calendar.MINUTE), true).show()
+            TimePickerDialog(
+                this,
+                dpd2,
+                kalendarz.get(Calendar.HOUR_OF_DAY),
+                kalendarz.get(Calendar.MINUTE),
+                true
+            ).show()
         }
 
     }
@@ -208,12 +252,15 @@ class AddMedActivity : AppCompatActivity() {
         val koniec = edKoniec.text.toString()
 
         if (nazwa.isEmpty() || dawka.isEmpty() || data.isEmpty() || czestotliwosc.isEmpty() || ileRazy.isEmpty()
-                || godzina.isEmpty()  || zapas.isEmpty() || koniec.isEmpty()) {
+            || godzina.isEmpty() || zapas.isEmpty() || koniec.isEmpty()
+        ) {
 
             Toast.makeText(this, "Proszę wypełnić wszystkie pola", Toast.LENGTH_SHORT).show()
         } else {
-            val lek = LekModel(1,  nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
-                    ileRazy = ileRazy, godzina = godzina,  zapas = zapas, koniec = koniec)
+            val lek = LekModel(
+                1, nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
+                ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec
+            )
 
             val status = sqliteHelper.addLek(lek)
 
@@ -228,7 +275,7 @@ class AddMedActivity : AppCompatActivity() {
     }
 
 
-    private fun updateLek(){
+    private fun updateLek() {
         val nazwa = edNazwa.text.toString()
         val dawka = edDawka.text.toString()
         val data = edData.text.toString()
@@ -239,31 +286,31 @@ class AddMedActivity : AppCompatActivity() {
         val zapas = edZapas.text.toString()
         val koniec = edKoniec.text.toString()
 
-        if (nazwa == lek?.nazwa && dawka == lek?.dawka && data ==lek?.data && czestotliwosc == lek?.czestotliwosc.toString()
-                && ileRazy == lek?.ileRazy.toString() && godzina == lek?.godzina
-                && zapas == lek?.zapas && koniec == lek?.koniec.toString()){
+        if (nazwa == lek?.nazwa && dawka == lek?.dawka && data == lek?.data && czestotliwosc == lek?.czestotliwosc.toString()
+            && ileRazy == lek?.ileRazy.toString() && godzina == lek?.godzina
+            && zapas == lek?.zapas && koniec == lek?.koniec.toString()
+        ) {
 
             Toast.makeText(this, "Dane nie zostały zmienione", Toast.LENGTH_SHORT).show()
             return
         }
         if (lek == null) return
-        val lek = LekModel(id = lek!!.id,  nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
-                ileRazy = ileRazy, godzina = godzina,  zapas = zapas, koniec = koniec)
+        val lek = LekModel(
+            id = lek!!.id, nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
+            ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec
+        )
 
         val status = sqliteHelper.updateLek(lek)
-        if (status>-1){
+        if (status > -1) {
             clearEditText()
 
-        }else{
+        } else {
             Toast.makeText(this, "Aktualizacja nieudana", Toast.LENGTH_SHORT).show()
         }
     }
 
 
-
-
-
-    private fun clearEditText(){
+    private fun clearEditText() {
         edNazwa.setText("")
         edDawka.setText("")
         edData.setText("")
@@ -275,7 +322,6 @@ class AddMedActivity : AppCompatActivity() {
         edKoniec.setText("")
         edNazwa.requestFocus()
     }
-
 
 
     private fun initView() {

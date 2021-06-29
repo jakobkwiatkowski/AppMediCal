@@ -29,10 +29,10 @@ class LekAdapter: RecyclerView.Adapter<LekAdapter.LekViewHolder>(){
         this.onClickDeleteItem = callback
     }
 
-    fun setOnClickUpdateItem(callback:(LekModel) -> Unit) {
+    fun setOnClickUpdateItem(callback:(LekModel)->Unit){
         this.onClickUpdateItem = callback
-
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = LekViewHolder (
             LayoutInflater.from(parent.context).inflate(R.layout.card_view, parent, false)
     )
@@ -63,8 +63,8 @@ class LekAdapter: RecyclerView.Adapter<LekAdapter.LekViewHolder>(){
         private var godzina =  view.findViewById<TextView>(R.id.godzina_txt)
         private var zapas =  view.findViewById<TextView>(R.id.zapas_tabletek_txt)
         private var koniec = view.findViewById<TextView>(R.id.koniec_leku_txt)
-         var btnDelete = view.findViewById<ImageButton>(R.id.usun)
-         var btnUpdate = view.findViewById<ImageButton>(R.id.zmien)
+         var btnDelete = view.findViewById<ImageButton>(R.id.zmien)
+         var btnUpdate = view.findViewById<ImageButton>(R.id.usun)
 
 
         fun bindView(lek:LekModel) {

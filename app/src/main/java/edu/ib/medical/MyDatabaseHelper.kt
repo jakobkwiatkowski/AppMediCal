@@ -7,15 +7,13 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 
-
-
-
-class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) { //tworzenie tabeli
+class MyDataBaseHelper(context: Context) :
+    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) { //tworzenie tabeli
 
     companion object {
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "Leki.db"
-        private const  val TABLE_NAME = "Leki"
+        private const val TABLE_NAME = "Leki"
         private const val ID = "id"
         private const val NazwaLeku = "nazwa_leku"
         private const val Dawka = "dawka_leku"
@@ -23,22 +21,24 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
         private const val Czestotliwosc = "czestotliwosc"
         private const val IleRazy = "ile_razy"
         private const val Godzina = "godzina"
-//        private const val Przypomnienie = "przypomnienie"
+
+        //        private const val Przypomnienie = "przypomnienie"
         private const val ZapasTabletek = "zapas_tabletek"
         private const val KoniecLeku = "koniec"
     }
+
     override fun onCreate(db: SQLiteDatabase?) {
-      val createTableLeki = ("CREATE TABLE " + TABLE_NAME +
-                        "("  +  ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        NazwaLeku + " TEXT," +
-                        Dawka + " TEXT," +
-                        DataRozpoczecia + " TEXT," +
-                        Czestotliwosc + " TEXT," +
-                        IleRazy + " TEXT," +
-                        Godzina + " TEXT," +
-                        ZapasTabletek + " TEXT," +
-                        KoniecLeku + " TEXT" + ")")
-       db?.execSQL(createTableLeki)
+        val createTableLeki = ("CREATE TABLE " + TABLE_NAME +
+                "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                NazwaLeku + " TEXT," +
+                Dawka + " TEXT," +
+                DataRozpoczecia + " TEXT," +
+                Czestotliwosc + " TEXT," +
+                IleRazy + " TEXT," +
+                Godzina + " TEXT," +
+                ZapasTabletek + " TEXT," +
+                KoniecLeku + " TEXT" + ")")
+        db?.execSQL(createTableLeki)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -46,7 +46,7 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
         onCreate(db)
     }
 
-    fun addLek(lek:LekModel):Long{
+    fun addLek(lek: LekModel): Long {
         val db: SQLiteDatabase = this.writableDatabase
         val cv = ContentValues()
 
@@ -66,7 +66,7 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
         return succes
     }
 
-    fun getAllLeki(): ArrayList<LekModel>{
+    fun getAllLeki(): ArrayList<LekModel> {
 
         val lekList: ArrayList<LekModel> = ArrayList()
         val selectQuery = "SELECT * FROM $TABLE_NAME"
@@ -74,7 +74,7 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
 
         val cursor: Cursor?
 
-        try{
+        try {
             cursor = db.rawQuery(selectQuery, null)
 
         } catch (e: Exception) {
@@ -83,8 +83,8 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
             return ArrayList()
         }
 
-        var id:Int
-        var nazwa:String
+        var id: Int
+        var nazwa: String
         var dawka: String
         var data: String
         var czestotliwosc: String
@@ -95,9 +95,9 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
         var koniec: String
 
 
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
 
-            do{
+            do {
                 id = cursor.getInt(cursor.getColumnIndex("id"))
                 nazwa = cursor.getString(cursor.getColumnIndex("nazwa_leku"))
                 dawka = cursor.getString(cursor.getColumnIndex("dawka_leku"))
@@ -108,15 +108,25 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
                 zapas = cursor.getString(cursor.getColumnIndex("zapas_tabletek"))
                 koniec = cursor.getString(cursor.getColumnIndex("koniec"))
 
-                val lek = LekModel(id =id, nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc, ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec)
+                val lek = LekModel(
+                    id = id,
+                    nazwa = nazwa,
+                    dawka = dawka,
+                    data = data,
+                    czestotliwosc = czestotliwosc,
+                    ileRazy = ileRazy,
+                    godzina = godzina,
+                    zapas = zapas,
+                    koniec = koniec
+                )
                 lekList.add(lek)
-            }while (cursor.moveToNext())
+            } while (cursor.moveToNext())
         }
         return lekList
     }
 
 
-    fun updateLek(lek:LekModel): Int{
+    fun updateLek(lek: LekModel): Int {
         val db = this.writableDatabase
 
         val cv = ContentValues()
@@ -136,7 +146,7 @@ class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
 
     }
 
-    fun deleteLekById(id:Int): Int{
+    fun deleteLekById(id: Int): Int {
         val db = this.writableDatabase
 
         val cv = ContentValues()
