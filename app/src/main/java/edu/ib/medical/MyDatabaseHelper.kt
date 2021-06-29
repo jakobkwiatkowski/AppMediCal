@@ -5,83 +5,158 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.widget.Toast
 
 
-val DATABASE_NAME: String ="MedLibrary.db"
-val DATABASE_VERSION: Int =1
-
-class MyDataBaseHelper(val context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) { //tworzenie tabeli
 
 
-    val TABLE_NAME = "Leki"
-    val COLUMN_ID ="_id"
-    val COLUMN_NazwaLeku = "nazwa_leku"
-    val COLUMN_Dawka= "dawka_leku"
-    val COLUMN_DataRozpoczecia = "data"
-    val COLUMN_Czestotliwosc = "czestotliwość"
-    val COLUMN_IleRazy ="ile_razy"
-    val COLUMN_Godzina = "godzina"
-    val COLUMN_Przypomnienie = "przypomnienie"
-    val COLUMN_ZapasTabletek ="zapas_tabletek"
-    val COLUMN_KoniecLeku = "przypomnienie_o_braku_leków"
 
+class MyDataBaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) { //tworzenie tabeli
+
+    companion object {
+        private const val DATABASE_VERSION = 1
+        private const val DATABASE_NAME = "Leki.db"
+        private const  val TABLE_NAME = "Leki"
+        private const val ID = "id"
+        private const val NazwaLeku = "nazwa_leku"
+        private const val Dawka = "dawka_leku"
+        private const val DataRozpoczecia = "data"
+        private const val Czestotliwosc = "czestotliwosc"
+        private const val IleRazy = "ile_razy"
+        private const val Godzina = "godzina"
+//        private const val Przypomnienie = "przypomnienie"
+        private const val ZapasTabletek = "zapas_tabletek"
+        private const val KoniecLeku = "koniec"
+    }
     override fun onCreate(db: SQLiteDatabase?) {
-      val SQL_CREATE_TABLE: String =
-                "CREATE TABLE" + TABLE_NAME +
-                        "("  +  COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_NazwaLeku + " TEXT, " +
-                        COLUMN_Dawka + "T EXT, " +
-                        COLUMN_DataRozpoczecia + " TEXT, " +
-                        COLUMN_Czestotliwosc+ " TEXT, " +
-                        COLUMN_IleRazy + " TEXT, " +
-                        COLUMN_Godzina + " TEXT, " +
-                        COLUMN_Przypomnienie + " TEXT, " +
-                        COLUMN_ZapasTabletek + " TEXT, " +
-                        COLUMN_KoniecLeku + " TEXT);"
-
-
-       db?.execSQL(SQL_CREATE_TABLE)
+      val createTableLeki = ("CREATE TABLE " + TABLE_NAME +
+                        "("  +  ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        NazwaLeku + " TEXT," +
+                        Dawka + " TEXT," +
+                        DataRozpoczecia + " TEXT," +
+                        Czestotliwosc + " TEXT," +
+                        IleRazy + " TEXT," +
+                        Godzina + " TEXT," +
+                        ZapasTabletek + " TEXT," +
+                        KoniecLeku + " TEXT" + ")")
+       db?.execSQL(createTableLeki)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE IF EXISTS" + TABLE_NAME)
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
 
-    fun addLek(nazwa_leku: String, dawka_leku:String, data:String, czestotliwosc:String, ile_razy:String, godzina: String, przypomnienie:String, zapas:String, koniec_leku:String){
+    fun addLek(std:LekModel):Long{
         val db: SQLiteDatabase = this.writableDatabase
-        val cv: ContentValues = ContentValues()
+        val cv = ContentValues()
 
-        cv.put(COLUMN_NazwaLeku, nazwa_leku)
-        cv.put(COLUMN_Dawka, dawka_leku)
-        cv.put(COLUMN_DataRozpoczecia, data)
-        cv.put(COLUMN_Czestotliwosc, czestotliwosc)
-        cv.put(COLUMN_IleRazy, ile_razy)
-        cv.put(COLUMN_Godzina, godzina)
-        cv.put(COLUMN_Przypomnienie, przypomnienie)
-        cv.put(COLUMN_ZapasTabletek, zapas)
-        cv.put(COLUMN_KoniecLeku, koniec_leku)
+//        cv.put(ID, std.id)
+        cv.put(NazwaLeku, std.nazwa)
+        cv.put(Dawka, std.dawka)
+        cv.put(DataRozpoczecia, std.data)
+        cv.put(Czestotliwosc, std.czestotliwosc)
+        cv.put(IleRazy, std.ileRazy)
+        cv.put(Godzina, std.godzina)
+//        cv.put(Przypomnienie, std.przypomnienie)
+        cv.put(ZapasTabletek, std.zapas)
+        cv.put(KoniecLeku, std.koniec)
 
-        val result: Long = db.insert(TABLE_NAME, null, cv)
-        if(result == null) {
-            Toast.makeText(context, "Nie udało się dodać leku", Toast.LENGTH_SHORT).show()
-        } else{
-
-            Toast.makeText(context, "Dodano lek do listy leków", Toast.LENGTH_SHORT).show()
-        }
+        val succes = db.insert(TABLE_NAME, null, cv)
+        db.close()
+        return succes
     }
 
-    fun readAllData(): Cursor{
-        val query = "SELECTED * FROM" + TABLE_NAME
+    fun getAllLeki(): ArrayList<LekModel>{
+
+        val stdList: ArrayList<LekModel> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_NAME"
         val db = this.readableDatabase
 
-        val cursor: Cursor = db.rawQuery(query, null);
-        return cursor
+        val cursor: Cursor?
+
+        try{
+            cursor = db.rawQuery(selectQuery, null)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var id:Int
+        var nazwa:String
+        var dawka: String
+        var data: String
+        var czestotliwosc: String
+        var ileRazy: String
+        var godzina: String
+//        var przypomnienie: String
+        var zapas: String
+        var koniec: String
+
+
+        if(cursor.moveToFirst()){
+
+            do{
+                id = cursor.getInt(cursor.getColumnIndex("id"))
+                nazwa = cursor.getString(cursor.getColumnIndex("nazwa_leku"))
+                dawka = cursor.getString(cursor.getColumnIndex("dawka_leku"))
+                data = cursor.getString(cursor.getColumnIndex("data"))
+                czestotliwosc = cursor.getString(cursor.getColumnIndex("czestotliwosc"))
+                ileRazy = cursor.getString(cursor.getColumnIndex("ile_razy"))
+                godzina = cursor.getString(cursor.getColumnIndex("godzina"))
+                zapas = cursor.getString(cursor.getColumnIndex("zapas_tabletek"))
+                koniec = cursor.getString(cursor.getColumnIndex("koniec"))
+
+                val std = LekModel(id =id, nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc, ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec)
+                stdList.add(std)
+            }while (cursor.moveToNext())
+        }
+        return stdList
+    }
+
+
+    fun updateLek(std:LekModel): Int{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+//        cv.put(ID, std.id)
+        cv.put(NazwaLeku, std.nazwa)
+        cv.put(Dawka, std.dawka)
+        cv.put(DataRozpoczecia, std.data)
+        cv.put(Czestotliwosc, std.czestotliwosc)
+        cv.put(IleRazy, std.ileRazy)
+        cv.put(Godzina, std.godzina)
+//        cv.put(Przypomnienie, std.przypomnienie)
+        cv.put(ZapasTabletek, std.zapas)
+        cv.put(KoniecLeku, std.koniec)
+
+        val success = db.update(TABLE_NAME, cv, "id=" + std.id, null)
+        db.close()
+        return success
+
+    }
+
+    fun deleteLekById(id:Int): Int{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(ID, id)
+
+        val success = db.delete(TABLE_NAME, "id=$id", null)
+        db.close()
+        return success
 
     }
 
 }
+
+
+
+
+
+
+
 
 
 

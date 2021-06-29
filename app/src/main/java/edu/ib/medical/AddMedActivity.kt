@@ -2,11 +2,9 @@ package edu.ib.medical
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.ContentValues
-import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import java.text.SimpleDateFormat
@@ -17,6 +15,25 @@ import java.util.*
 
 
 class AddMedActivity : AppCompatActivity() {
+
+
+    private lateinit var edNazwa: EditText
+    private lateinit var edDawka: EditText
+    private lateinit var edData: TextView
+    private lateinit var edCzestotliwosc: TextView
+    private lateinit var edIleRazy: TextView
+    private lateinit var edGodzina: TextView
+    private lateinit var edZapas: EditText
+    private lateinit var edKoniec: TextView
+
+    private lateinit var btnAdd: Button
+
+
+    private lateinit var sqliteHelper: MyDataBaseHelper
+
+    private  var adapter: LekAdapter? = null
+    private var std: LekModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.addmed)
@@ -27,51 +44,94 @@ class AddMedActivity : AppCompatActivity() {
         addGodzina()
         addTermin()
         addCzas()
-        Baza()
+
+
+        initView()
+        sqliteHelper = MyDataBaseHelper(this)
+
+        btnAdd.setOnClickListener { addLek() }
+
+        adapter?.setOnClickItem {
+            Toast.makeText(this, it.nazwa, Toast.LENGTH_SHORT).show()
+
+            edNazwa.setText(it.nazwa)
+            edDawka.setText(it.dawka)
+            edData.setText(it.data)
+            edCzestotliwosc.setText(it.czestotliwosc)
+            edIleRazy.setText(it.ileRazy).toString()
+            edGodzina.setText(it.godzina)
+            edZapas.setText(it.zapas)
+            edKoniec.setText(it.koniec)
+            std = it
+        }
+
+        adapter?.setOnClickUpdateItem {
+            updateLek()
+        }
+
+
     }
 
-    private fun addPrzypomnienie() {
-        val spinner5: Spinner = findViewById(R.id.koniec_leku)
 
-        val przypomnienie = arrayOf("2 dni przed końcem", "3 dni przed końcem", "4 dni przed końcem", "5 dni przed końcem", "6 dni przed końcem", "7 dni przed końcem")
+    private fun addPrzypomnienie() {
+
+
+        val rezultat = findViewById<TextView>(R.id.koniec_leku)
+        val spinner5: Spinner = findViewById(R.id.przypomnij)
+
+        val przypomnienie = arrayOf("Przypomnij:", "2 dni przed końcem", "3 dni przed końcem", "4 dni przed końcem", "5 dni przed końcem", "6 dni przed końcem", "7 dni przed końcem")
         val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, przypomnienie)
 
         spinner5.adapter = arrayAdapter
         spinner5.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                rezultat.text = przypomnienie[position]
+            }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
 
 
+
+
+
     private fun addIle_razy() {
 
-        val spinner3: Spinner = findViewById(R.id.ile_razy)
-        val ile_razy = arrayOf("1", "2", "3", "4", "5")
+        val rezultat = findViewById<TextView>(R.id.ile_razy)
+        val spinner3: Spinner = findViewById(R.id.ile)
+        val ile_razy = arrayOf("Ile razy dziennie:", "1", "2", "3", "4", "5")
         val arrayAdapter3 = ArrayAdapter(this, android.R.layout.simple_spinner_item, ile_razy)
 
         spinner3.adapter = arrayAdapter3
         spinner3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                rezultat.text = ile_razy[position]
+            }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
 
     private fun addCzestotliowsc() {
 
-        val spinner2: Spinner = findViewById(R.id.czestotliwosc)
-        val czestotliwosc = arrayOf("codziennie", "co 2 dni", "co 3 dni", "co 4 dni", "co 5 dni", "co 6 dni", "co tydzień", "co 2 tygodnie", "co miesiąc")
+        val rezultat = findViewById<TextView>(R.id.czestotliwosc)
+        val spinner2: Spinner = findViewById(R.id.czesto)
+        val czestotliwosc = arrayOf("Jak często:", "codziennie", "co 2 dni", "co 3 dni", "co 4 dni", "co 5 dni", "co 6 dni", "co tydzień", "co 2 tygodnie", "co miesiąc")
         val arrayAdapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, czestotliwosc)
 
         spinner2.adapter = arrayAdapter2
         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                rezultat.text = czestotliwosc[position]
+            }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
         }
     }
+
+
     private fun addData(){
 
         val data: TextView = findViewById(R.id.wybierzdate)
@@ -133,48 +193,117 @@ class AddMedActivity : AppCompatActivity() {
 
     }
 
-    fun Baza(){
+
+    private fun addLek() {
 
 
-        val nazwa_leku: TextView = findViewById(R.id.nazwa_leku)
-        val dawka_leku: TextView = findViewById(R.id.dawka)
-        val data:TextView = findViewById(R.id.wybierzdate)
-        val czestotliwosc: Spinner= findViewById(R.id.czestotliwosc)
-        val ile_razy:Spinner = findViewById(R.id.ile_razy)
-        val godzina:TextView=findViewById(R.id.wybierzgodzine)
-        val przypomnienie:TextView = findViewById(R.id.switch1)
-        val zapas:TextView = findViewById(R.id.zapas)
-        val koniec_leku:Spinner = findViewById(R.id.koniec_leku)
+        val nazwa = edNazwa.text.toString()
+        val dawka = edDawka.text.toString()
+        val data = edData.text.toString()
+        val czestotliwosc = edCzestotliwosc.text.toString()
+        val ileRazy = edIleRazy.text.toString()
+        val godzina = edGodzina.text.toString()
+//        val przypomnienie = edPrzypomnienie.text.toString()
+        val zapas = edZapas.text.toString()
+        val koniec = edKoniec.text.toString()
 
-        val save = findViewById<Button>(R.id.zapisz)
-        save.setOnClickListener{
-                val myDB: MyDataBaseHelper= MyDataBaseHelper(this)
-                myDB.addLek(nazwa_leku.getText().toString().trim(),
-                    dawka_leku.getText().toString().trim(),
-                        data.getText().toString().trim(),
-                        czestotliwosc.getSelectedItem().toString().trim(),
-                        ile_razy.getSelectedItem().toString().trim(),
-                        godzina.getText().toString().trim(),
-                        przypomnienie.getText().toString().trim(),
-                        zapas.getText().toString().trim(),
-                        koniec_leku.getSelectedItem().toString().trim()
+        if (nazwa.isEmpty() || dawka.isEmpty() || data.isEmpty() || czestotliwosc.isEmpty() || ileRazy.isEmpty()
+                || godzina.isEmpty()  || zapas.isEmpty() || koniec.isEmpty()) {
 
+            Toast.makeText(this, "Proszę wypełnić wszystkie pola", Toast.LENGTH_SHORT).show()
+        } else {
+            val std = LekModel(1,  nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
+                    ileRazy = ileRazy, godzina = godzina,  zapas = zapas, koniec = koniec)
 
+            val status = sqliteHelper.addLek(std)
 
-                )
+            if (status > -1) {
+                Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show()
+                clearEditText()
 
-
-
-
-
-
-
-
+            } else {
+                Toast.makeText(this, "Nie dodano leku", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
 
+    private fun updateLek(){
+        val nazwa = edNazwa.text.toString()
+        val dawka = edDawka.text.toString()
+        val data = edData.text.toString()
+        val czestotliwosc = edCzestotliwosc.text.toString()
+        val ileRazy = edIleRazy.text.toString()
+        val godzina = edGodzina.text.toString()
+//        val przypomnienie = edPrzypomnienie.text.toString()
+        val zapas = edZapas.text.toString()
+        val koniec = edKoniec.text.toString()
+
+        if (nazwa == std?.nazwa && dawka == std?.dawka && data == std?.data && czestotliwosc == std?.czestotliwosc.toString()
+                && ileRazy == std?.ileRazy.toString() && godzina == std?.godzina
+                && zapas == std?.zapas && koniec == std?.koniec.toString()){
+
+            Toast.makeText(this, "Dane nie zostały zmienione", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (std == null) return
+        val std = LekModel(id = std!!.id,  nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
+                ileRazy = ileRazy, godzina = godzina,  zapas = zapas, koniec = koniec)
+
+        val status = sqliteHelper.updateLek(std)
+        if (status>-1){
+            clearEditText()
+
+        }else{
+            Toast.makeText(this, "Aktualizacja nieudana", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+//    private fun getLek(){
+//        val stdList = sqliteHelper.getAllLeki()
+//        Log.e("pppp", "${stdList.size}")
+//
+//        //Wyświetlanie danych w RecyclerView
+//        adapter?.addItems(stdList)
+//    }
+
+
+
+
+    private fun clearEditText(){
+        edNazwa.setText("")
+        edDawka.setText("")
+        edData.setText("")
+        edCzestotliwosc.setText("")
+        edIleRazy.setText("")
+        edGodzina.setText("")
+//        edPrzypomnienie.setText("")
+        edZapas.setText("")
+        edKoniec.setText("")
+        edNazwa.requestFocus()
+    }
+
+
+
+    private fun initView() {
+        edNazwa = findViewById(R.id.nazwa_leku)
+        edDawka = findViewById(R.id.dawka)
+        edData = findViewById(R.id.wybierzdate)
+        edCzestotliwosc = findViewById(R.id.czestotliwosc)
+        edIleRazy = findViewById(R.id.ile_razy)
+        edGodzina = findViewById(R.id.wybierzgodzine)
+//        edPrzypomnienie = findViewById(R.id.switch1)
+        edZapas = findViewById(R.id.zapas)
+        edKoniec = findViewById(R.id.koniec_leku)
+        btnAdd = findViewById(R.id.zapisz)
+
+    }
+
+
 }
+
+
+
 
 
 

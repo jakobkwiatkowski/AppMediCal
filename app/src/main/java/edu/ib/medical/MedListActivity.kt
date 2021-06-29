@@ -6,26 +6,50 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
+import android.util.Log
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MedListActivity : AppCompatActivity() {
+
+
+
+    private lateinit var sqliteHelper: MyDataBaseHelper
+    private lateinit var recyclerView: RecyclerView
+    private  var adapter: LekAdapter? = null
+    private var std: LekModel? = null
+
+    private lateinit var btnView:Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.listmed)
         goMenu()
         goAddMed()
-//        storeDataInArrays()
-//        val recyclerView:RecyclerView = findViewById(R.id.recycler_view)
-//        val cardViewAdapter = CardViewAdapter(this)
-//        recyclerView.setAdapter(cardViewAdapter)
+
+
+
+        initView()
+        initRecyclerVew()
+        btnView.setOnClickListener { getLek() }
+        sqliteHelper = MyDataBaseHelper(this)
+
+
+
+        adapter?.setOnClickDeleteItem {
+            deleteLek(it.id)
+        }
+
+
 
 
 
     }
+
+
+
     private fun goMenu() {
         val menuButton = findViewById<ImageView>(R.id.menuButton2)
         menuButton.setOnClickListener {
@@ -33,6 +57,8 @@ class MedListActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
     private fun goAddMed(){
         val addMedButton = findViewById<Button>(R.id.addMedButton)
         addMedButton.setOnClickListener {
@@ -43,37 +69,53 @@ class MedListActivity : AppCompatActivity() {
 
 
 
-    val myDB = MyDataBaseHelper(this)
-    val lek_id = ArrayList<String>()
-    val nazwa_leku= ArrayList<String>()
-    val dawka_leku = ArrayList<String>()
-    val data = ArrayList<String>()
-    val czestotliwosc = ArrayList<String>()
-    val ile_razy = ArrayList<String>()
-    val godzina = ArrayList<String>()
-    val przypomnienie = ArrayList<String>()
-    val zapas = ArrayList<String>()
-    val koniec_leku = ArrayList<String>()
+    private fun getLek(){
+        val stdList = sqliteHelper.getAllLeki()
+        Log.e("pppp", "${stdList.size}")
 
-    fun storeDataInArrays(){
-        val cursor:Cursor = myDB.readAllData()
-        if(cursor.getCount() == 0){
-            Toast.makeText(this, "Brak danych", Toast.LENGTH_SHORT).show()
-        }else{
-            while(cursor.moveToNext()){
-                lek_id.add(cursor.getString(0))
-                nazwa_leku.add(cursor.getString(1))
-                dawka_leku.add(cursor.getString(2))
-                data.add(cursor.getString(3))
-                czestotliwosc.add(cursor.getString(4))
-                ile_razy.add(cursor.getString(5))
-                godzina.add(cursor.getString(6))
-                przypomnienie.add(cursor.getString(7))
-                zapas.add(cursor.getString(8))
-                koniec_leku.add(cursor.getString(9))
-            }
-        }
+        //Wyświetlanie danych w RecyclerView
+        adapter?.addItems(stdList)
     }
+
+
+
+
+    private fun deleteLek(id:Int){
+
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Czy na pewno chcesz usunąć ten lek?")
+        builder.setCancelable(true)
+        builder.setPositiveButton("Tak"){ dialog, _ ->
+            sqliteHelper.deleteLekById(id)
+            getLek()
+            dialog.dismiss()
+
+        }
+        builder.setNegativeButton("Nie") {dialog, _ ->
+            dialog.dismiss()
+        }
+        val alert = builder.create()
+        alert.show()
+    }
+
+
+
+    private fun initRecyclerVew(){
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = LekAdapter()
+        recyclerView.adapter = adapter
+    }
+
+    private fun initView() {
+        recyclerView = findViewById(R.id.recycler_view)
+        btnView = findViewById(R.id.show)
+
+
+    }
+
+
+
+
 
 
 
