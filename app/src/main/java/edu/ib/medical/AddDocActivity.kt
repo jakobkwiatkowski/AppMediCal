@@ -41,6 +41,7 @@ class AddDocActivity : AppCompatActivity() {
             edAdress.setText(it.adress)
             edCity.setText(it.city)
         }
+
         adapter?.setOnClickUpdateItem { updateDoc() }
 
         addBtn.setOnClickListener { addDoc() }

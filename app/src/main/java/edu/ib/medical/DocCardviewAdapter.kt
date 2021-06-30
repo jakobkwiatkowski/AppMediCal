@@ -42,6 +42,8 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
     override fun onBindViewHolder(holder: DocViewHolder, position: Int) {
         val doc = docList[position]
         holder.bindView(doc)
+
+
         holder.itemView.setOnClickListener { onClickItem?.invoke(doc) }
         holder.btnDelete.setOnClickListener { onClickDeleteItem?.invoke(doc) }
         holder.btnUpdate.setOnClickListener { onClickUpdateItem?.invoke(doc) }

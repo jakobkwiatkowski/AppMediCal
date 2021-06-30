@@ -26,7 +26,8 @@ class DocListActivity : AppCompatActivity() {
         goAddDoc()
         initView()
         initRecyclerView()
-        viewBtn.setOnClickListener{getDoc()}
+        viewBtn.setOnClickListener { getDoc() }
+
         sqliteHelper = DocDatabaseHelper(this)
 
         adapter?.setOnClickDeleteItem { deleteDoc(it.id) }
@@ -49,8 +50,6 @@ class DocListActivity : AppCompatActivity() {
 
     private fun getDoc(){
         val docList = sqliteHelper.getAllDocs()
-        Log.e("pppp", "${docList.size}")
-
         adapter?.addItems(docList)
     }
 
@@ -76,6 +75,7 @@ class DocListActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = DocAdapter()
         recyclerView.adapter = adapter
+
     }
     private fun initView(){
         recyclerView = findViewById(R.id.doc_recycler)
