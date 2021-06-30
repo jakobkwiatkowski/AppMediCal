@@ -56,7 +56,7 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
 
 
     class DocViewHolder(var view: View):RecyclerView.ViewHolder(view) {
-        var id = view.findViewById<TextView>(R.id.docID_txt)
+        private var id = view.findViewById<TextView>(R.id.docID_txt)
         private var name = view.findViewById<TextView>(R.id.name_txt)
         private var spec = view.findViewById<TextView>(R.id.spec_txt)
         private var phone = view.findViewById<TextView>(R.id.phone_txt)
