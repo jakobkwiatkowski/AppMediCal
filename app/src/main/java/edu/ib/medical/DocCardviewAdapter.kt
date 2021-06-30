@@ -1,10 +1,13 @@
 package edu.ib.medical
 
+import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
@@ -19,30 +22,33 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setOnClickItem(callback:(DocModel) -> Unit){
+    fun setOnClickItem(callback: (DocModel) -> Unit){
         this.onClickItem = callback
     }
 
-    fun setOnClickDeleteItem(callback:(DocModel)->Unit){
+    fun setOnClickDeleteItem(callback: (DocModel) -> Unit){
         this.onClickDeleteItem = callback
     }
 
-    fun setOnClickUpdateItem(callback:(DocModel) -> Unit) {
+    fun setOnClickUpdateItem(callback: (DocModel) -> Unit) {
         this.onClickUpdateItem = callback
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DocViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.doc_cardview, parent, false )
+        LayoutInflater.from(parent.context).inflate(R.layout.doc_cardview, parent, false)
     )
 
     override fun onBindViewHolder(holder: DocViewHolder, position: Int) {
         val doc = docList[position]
         holder.bindView(doc)
-        holder.itemView.setOnClickListener{onClickItem?.invoke(doc)}
-        holder.btnDelete.setOnClickListener{onClickDeleteItem?.invoke(doc)}
-        holder.btnUpdate.setOnClickListener{onClickUpdateItem?.invoke(doc)}
+        holder.itemView.setOnClickListener { onClickItem?.invoke(doc) }
+        holder.btnDelete.setOnClickListener { onClickDeleteItem?.invoke(doc) }
+        holder.btnUpdate.setOnClickListener { onClickUpdateItem?.invoke(doc) }
+
     }
+
+
 
     override fun getItemCount():Int{
         return docList.size
@@ -50,7 +56,7 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
 
 
     class DocViewHolder(var view: View):RecyclerView.ViewHolder(view) {
-        private var id = view.findViewById<TextView>(R.id.docID_txt)
+        var id = view.findViewById<TextView>(R.id.docID_txt)
         private var name = view.findViewById<TextView>(R.id.name_txt)
         private var spec = view.findViewById<TextView>(R.id.spec_txt)
         private var phone = view.findViewById<TextView>(R.id.phone_txt)

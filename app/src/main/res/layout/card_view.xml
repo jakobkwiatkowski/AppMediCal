@@ -22,8 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
-                android:text="1"
-                android:textColor="#000"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,6 +35,7 @@
                 android:text="Nazwa 1"
                 android:textColor="#000"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -102,18 +102,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/koniec_leku_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="233dp"
-                android:text="Koniec leku 1"
-                android:textColor="#000"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/zapas_tabletek_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,8 +110,24 @@
                 android:text="Zapas tabletek 1"
                 android:textColor="#000"
                 android:textSize="16sp"
+                android:visibility ="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/koniec_leku_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="233dp"
+                android:text="Koniec leku 1"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:visibility ="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
 
             <ImageButton
                 android:id="@+id/zmien"
