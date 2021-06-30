@@ -11,7 +11,7 @@
         android:theme="@style/Theme.MediCal">
         <activity
             android:name=".AddMedActivity"
-            android:parentActivityName=".MedListActivity"></activity>
+            android:parentActivityName=".MedListActivity"> </activity>
         <activity android:name=".AddDocActivity"
             android:parentActivityName=".DocListActivity"> </activity>
         <activity android:name=".DocListActivity" />

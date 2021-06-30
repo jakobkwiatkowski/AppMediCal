@@ -35,11 +35,7 @@ class MedListActivity : AppCompatActivity() {
         btnView.setOnClickListener { getLek() }
         sqliteHelper = MyDataBaseHelper(this)
 
-
-
-        adapter?.setOnClickDeleteItem {
-            deleteLek(it.id)
-        }
+        adapter?.setOnClickDeleteItem { deleteLek(it.id) }
 
 
     }
