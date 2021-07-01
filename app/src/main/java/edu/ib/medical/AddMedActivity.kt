@@ -2,6 +2,7 @@ package edu.ib.medical
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,7 @@ class AddMedActivity : AppCompatActivity() {
     private lateinit var edKoniec: TextView
 
     private lateinit var btnAdd: Button
+    private lateinit var btnBack: Button
 
 
     private lateinit var sqliteHelper: MyDataBaseHelper
@@ -42,13 +44,12 @@ class AddMedActivity : AppCompatActivity() {
         addGodzina()
         addTermin()
         addCzas()
-
+        goListaLek()
 
         initView()
         sqliteHelper = MyDataBaseHelper(this)
 
         btnAdd.setOnClickListener { addLek() }
-
 
 
         adapter?.setOnClickUpdateItem {
@@ -192,7 +193,7 @@ class AddMedActivity : AppCompatActivity() {
     }
 
 
-    private fun addLek() {
+   fun addLek() {
 
 
         val nazwa = edNazwa.text.toString()
@@ -201,7 +202,6 @@ class AddMedActivity : AppCompatActivity() {
         val czestotliwosc = edCzestotliwosc.text.toString()
         val ileRazy = edIleRazy.text.toString()
         val godzina = edGodzina.text.toString()
-//        val przypomnienie = edPrzypomnienie.text.toString()
         val zapas = edZapas.text.toString()
         val koniec = edKoniec.text.toString()
 
@@ -221,6 +221,9 @@ class AddMedActivity : AppCompatActivity() {
             if (status > -1) {
                 Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show()
                 clearEditText()
+                btnBack.setOnClickListener {  val intent = Intent(this, MedListActivity::class.java)
+                    startActivity(intent) }
+
 
             } else {
                 Toast.makeText(this, "Nie dodano leku", Toast.LENGTH_SHORT).show()
@@ -236,7 +239,7 @@ class AddMedActivity : AppCompatActivity() {
         val czestotliwosc = edCzestotliwosc.text.toString()
         val ileRazy = edIleRazy.text.toString()
         val godzina = edGodzina.text.toString()
-//        val przypomnienie = edPrzypomnienie.text.toString()
+
         val zapas = edZapas.text.toString()
         val koniec = edKoniec.text.toString()
 
@@ -271,7 +274,7 @@ class AddMedActivity : AppCompatActivity() {
         edCzestotliwosc.setText("")
         edIleRazy.setText("")
         edGodzina.setText("")
-//        edPrzypomnienie.setText("")
+
         edZapas.setText("")
         edKoniec.setText("")
         edNazwa.requestFocus()
@@ -285,13 +288,23 @@ class AddMedActivity : AppCompatActivity() {
         edCzestotliwosc = findViewById(R.id.czestotliwosc)
         edIleRazy = findViewById(R.id.ile_razy)
         edGodzina = findViewById(R.id.wybierzgodzine)
-//        edPrzypomnienie = findViewById(R.id.switch1)
+
         edZapas = findViewById(R.id.zapas)
         edKoniec = findViewById(R.id.koniec_leku)
         btnAdd = findViewById(R.id.zapisz)
+        btnBack = findViewById(R.id.listaleki)
 
     }
 
+
+    fun goListaLek() {
+        val addBack = findViewById<Button>(R.id.listaleki)
+        addBack.setOnClickListener {
+            val intent = Intent(this, MedListActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
 
 }
 

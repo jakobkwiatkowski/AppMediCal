@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 class DocListActivity : AppCompatActivity() {
 
-    private lateinit var  sqliteHelper :DocDatabaseHelper
+    lateinit var  sqliteHelper :DocDatabaseHelper
     private lateinit var recyclerView: RecyclerView
     private var adapter: DocAdapter? = null
-    private var doc: DocModel? = null
 
-    private lateinit var viewBtn: Button
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,23 +27,22 @@ class DocListActivity : AppCompatActivity() {
         goMenu()
         goAddDoc()
 
-
+        sqliteHelper = DocDatabaseHelper(this)
         initView()
         initRecyclerView()
 
-        sqliteHelper = DocDatabaseHelper(this)
         adapter?.setOnClickDeleteItem { deleteDoc(it.id) }
 
 
 
-        getDoc() // wyświetlanie listy w widoku
-        viewBtn.setOnClickListener { getDoc() } //aktualizowanie listy
-
+        getDoc()
     }
 
-    private fun getDoc() {
+   fun getDoc() {
+
         val docList = sqliteHelper.getAllDocs()
         adapter?.addItems(docList)
+
 
     }
 
@@ -70,6 +69,8 @@ class DocListActivity : AppCompatActivity() {
         builder.setMessage("Czy na pewno usunąć lekarza?")
         builder.setCancelable(true)
         builder.setPositiveButton("tak") { dialog, _ ->
+            var sqliteHelper:DocDatabaseHelper
+            sqliteHelper = DocDatabaseHelper(this)
             sqliteHelper.deleteDocById(id)
             getDoc()
             dialog.dismiss()
@@ -81,7 +82,7 @@ class DocListActivity : AppCompatActivity() {
         alert.show()
     }
 
-    private fun initRecyclerView() {
+     fun initRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = DocAdapter()
         recyclerView.adapter = adapter
@@ -90,7 +91,7 @@ class DocListActivity : AppCompatActivity() {
 
     private fun initView() {
         recyclerView = findViewById(R.id.doc_recycler)
-        viewBtn = findViewById(R.id.docView)
+
     }
 
 

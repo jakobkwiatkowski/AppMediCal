@@ -18,9 +18,9 @@ class MedListActivity : AppCompatActivity() {
     private lateinit var sqliteHelper: MyDataBaseHelper
     private lateinit var recyclerView: RecyclerView
     private var adapter: LekAdapter? = null
-    private var lek: LekModel? = null
 
-    private lateinit var btnView: Button
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,20 +32,17 @@ class MedListActivity : AppCompatActivity() {
 
         initView()
         initRecyclerVew()
-        btnView.setOnClickListener { getLek() }
-        sqliteHelper = MyDataBaseHelper(this)
 
+        sqliteHelper = MyDataBaseHelper(this)
         adapter?.setOnClickDeleteItem { deleteLek(it.id) }
 
-        getLek() // wyświetlanie listy w widoku
-        btnView.setOnClickListener { getLek() } //aktualizowanie listy
+        getLek()
+
 
     }
 
          fun getLek() {
         val lekList = sqliteHelper.getAllLeki()
-
-        //Wyświetlanie danych w RecyclerView
         adapter?.addItems(lekList)
     }
 
@@ -98,7 +95,6 @@ class MedListActivity : AppCompatActivity() {
 
     private fun initView() {
         recyclerView = findViewById(R.id.recycler_view)
-        btnView = findViewById(R.id.show)
 
 
     }

@@ -1,13 +1,11 @@
 package edu.ib.medical
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.text.toSpannable
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class AddDocActivity : AppCompatActivity() {
@@ -20,24 +18,33 @@ class AddDocActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var addBtn: Button
+    private lateinit var backBtn: Button
     private lateinit var sqliteHelper: DocDatabaseHelper
 
     private var adapter: DocAdapter? = null
     private var doc: DocModel? = null
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.adddoctor)
 
-        initView()
+        goListaDoc()
+
+
+
 
         sqliteHelper = DocDatabaseHelper(this)
+        initView()
+
+
         addBtn.setOnClickListener { addDoc() }
 
 
-        adapter?.setOnClickUpdateItem { updateDoc() }
 
+        adapter?.setOnClickUpdateItem { updateDoc() }
 
     }
 
@@ -68,7 +75,10 @@ class AddDocActivity : AppCompatActivity() {
             if (status > -1) {
                 Toast.makeText(this, "Dodano lekarza!", Toast.LENGTH_SHORT).show()
                 clearEditText()
-//                DocListActivity().getDoc()
+                backBtn.setOnClickListener {  val intent = Intent(this, DocListActivity::class.java)
+                    startActivity(intent) }
+
+
             } else {
                 Toast.makeText(this, "Błąd dodawania lekarza", Toast.LENGTH_LONG).show()
             }
@@ -102,7 +112,6 @@ class AddDocActivity : AppCompatActivity() {
         if (status > -1) {
             clearEditText()
 
-//            DocListActivity().getDoc()
 
 
         } else {
@@ -122,7 +131,15 @@ class AddDocActivity : AppCompatActivity() {
     }
 
 
+    fun goListaDoc() {
+        val addBack = findViewById<Button>(R.id.listadoc)
+        addBack.setOnClickListener {
+            val intent = Intent(this, DocListActivity::class.java)
+            startActivity(intent)
+        }
 
+
+    }
 
     private fun initView() {
         edName = findViewById(R.id.docName)
@@ -132,6 +149,7 @@ class AddDocActivity : AppCompatActivity() {
         edAdress = findViewById(R.id.docAdress)
         edCity = findViewById(R.id.docCity)
         addBtn = findViewById(R.id.saveDoc)
+        backBtn = findViewById(R.id.listadoc)
 
     }
 

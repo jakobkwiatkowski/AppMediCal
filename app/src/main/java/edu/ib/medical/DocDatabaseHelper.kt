@@ -58,7 +58,7 @@ class DocDatabaseHelper(context: Context) :
     fun getAllDocs(): ArrayList<DocModel> {
         val docList: ArrayList<DocModel> = ArrayList()
         val selectQuery = "SELECT * FROM $TABLE_NAME"
-        val db = this.writableDatabase
+        val db = this.readableDatabase
         val cursor: Cursor?
 
         try {

@@ -22,7 +22,6 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
     }
 
 
-
     fun setOnClickDeleteItem(callback: (DocModel) -> Unit){
         this.onClickDeleteItem = callback
     }
@@ -46,7 +45,6 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
         holder.email.text = doc.email
         holder.adress.text = doc.adress
         holder.city.text = doc.city
-
 
         holder.btnDelete.setOnClickListener { onClickDeleteItem?.invoke(doc) }
         holder.btnUpdate.setOnClickListener { onClickUpdateItem?.invoke(doc) }
@@ -72,14 +70,6 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
         var btnUpdate = view.findViewById<ImageButton>(R.id.editDoc)
 
 
-//        fun bindView(doc: DocModel) {
-//            id.text = doc.id.toString()
-//            name.text = doc.name
-//            spec.text = doc.spec
-//            phone.text = doc.phone
-//            email.text = doc.email
-//            adress.text = doc.adress
-//            city.text = doc.city
-//        }
+
     }
 }

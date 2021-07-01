@@ -22,6 +22,7 @@ class LekAdapter: RecyclerView.Adapter<LekAdapter.LekViewHolder>(){
 
 
 
+
     fun setOnClickDeleteItem(callback:(LekModel)->Unit){
         this.onClickDeleteItem = callback
     }
