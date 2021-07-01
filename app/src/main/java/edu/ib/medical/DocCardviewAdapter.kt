@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
 
     private var docList: ArrayList<DocModel> = ArrayList()
-    private var onClickItem:((DocModel) -> Unit)? = null
     private var onClickDeleteItem:((DocModel) -> Unit)? = null
     private var onClickUpdateItem:((DocModel) -> Unit)? = null
 
@@ -22,9 +21,7 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setOnClickItem(callback: (DocModel) -> Unit){
-        this.onClickItem = callback
-    }
+
 
     fun setOnClickDeleteItem(callback: (DocModel) -> Unit){
         this.onClickDeleteItem = callback
@@ -41,10 +38,16 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
 
     override fun onBindViewHolder(holder: DocViewHolder, position: Int) {
         val doc = docList[position]
-        holder.bindView(doc)
+
+        holder.id.text = doc.id.toString()
+        holder.name.text = doc.name
+        holder.spec.text = doc.spec
+        holder.phone.text = doc.phone
+        holder.email.text = doc.email
+        holder.adress.text = doc.adress
+        holder.city.text = doc.city
 
 
-        holder.itemView.setOnClickListener { onClickItem?.invoke(doc) }
         holder.btnDelete.setOnClickListener { onClickDeleteItem?.invoke(doc) }
         holder.btnUpdate.setOnClickListener { onClickUpdateItem?.invoke(doc) }
 
@@ -58,25 +61,25 @@ class DocAdapter: RecyclerView.Adapter<DocAdapter.DocViewHolder>() {
 
 
     class DocViewHolder(var view: View):RecyclerView.ViewHolder(view) {
-        private var id = view.findViewById<TextView>(R.id.docID_txt)
-        private var name = view.findViewById<TextView>(R.id.name_txt)
-        private var spec = view.findViewById<TextView>(R.id.spec_txt)
-        private var phone = view.findViewById<TextView>(R.id.phone_txt)
-        private var email = view.findViewById<TextView>(R.id.email_txt)
-        private var adress = view.findViewById<TextView>(R.id.adress_txt)
-        private var city = view.findViewById<TextView>(R.id.city_txt)
+        var id = view.findViewById<TextView>(R.id.docID_txt)
+        var name = view.findViewById<TextView>(R.id.name_txt)
+        var spec = view.findViewById<TextView>(R.id.spec_txt)
+        var phone = view.findViewById<TextView>(R.id.phone_txt)
+        var email = view.findViewById<TextView>(R.id.email_txt)
+        var adress = view.findViewById<TextView>(R.id.adress_txt)
+        var city = view.findViewById<TextView>(R.id.city_txt)
         var btnDelete = view.findViewById<ImageButton>(R.id.deleteDoc)
         var btnUpdate = view.findViewById<ImageButton>(R.id.editDoc)
 
 
-        fun bindView(doc: DocModel) {
-            id.text = doc.id.toString()
-            name.text = doc.name
-            spec.text = doc.spec
-            phone.text = doc.phone
-            email.text = doc.email
-            adress.text = doc.adress
-            city.text = doc.city
-        }
+//        fun bindView(doc: DocModel) {
+//            id.text = doc.id.toString()
+//            name.text = doc.name
+//            spec.text = doc.spec
+//            phone.text = doc.phone
+//            email.text = doc.email
+//            adress.text = doc.adress
+//            city.text = doc.city
+//        }
     }
 }

@@ -101,6 +101,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <ImageButton
                 android:id="@+id/editDoc"
                 android:layout_width="50dp"
@@ -122,9 +123,17 @@
                 app:srcCompat="@android:drawable/ic_menu_delete" />
 
 
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="196dp" />
 </LinearLayout>
 
 

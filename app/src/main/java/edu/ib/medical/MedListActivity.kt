@@ -37,7 +37,16 @@ class MedListActivity : AppCompatActivity() {
 
         adapter?.setOnClickDeleteItem { deleteLek(it.id) }
 
+        getLek() // wyświetlanie listy w widoku
+        btnView.setOnClickListener { getLek() } //aktualizowanie listy
 
+    }
+
+         fun getLek() {
+        val lekList = sqliteHelper.getAllLeki()
+
+        //Wyświetlanie danych w RecyclerView
+        adapter?.addItems(lekList)
     }
 
 
@@ -59,13 +68,7 @@ class MedListActivity : AppCompatActivity() {
     }
 
 
-    private fun getLek() {
-        val lekList = sqliteHelper.getAllLeki()
-        Log.e("pppp", "${lekList.size}")
 
-        //Wyświetlanie danych w RecyclerView
-        adapter?.addItems(lekList)
-    }
 
 
     private fun deleteLek(id: Int) {

@@ -49,23 +49,10 @@ class AddMedActivity : AppCompatActivity() {
 
         btnAdd.setOnClickListener { addLek() }
 
-        adapter?.setOnClickItem {
-            Toast.makeText(this, it.nazwa, Toast.LENGTH_SHORT).show()
 
-            edNazwa.setText(it.nazwa)
-            edDawka.setText(it.dawka)
-            edData.setText(it.data)
-            edCzestotliwosc.setText(it.czestotliwosc)
-            edIleRazy.setText(it.ileRazy).toString()
-            edGodzina.setText(it.godzina)
-            edZapas.setText(it.zapas)
-            edKoniec.setText(it.koniec)
-            lek = it
-        }
 
         adapter?.setOnClickUpdateItem {
-            updateLek()
-        }
+            updateLek() }
 
 
     }

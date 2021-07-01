@@ -10,11 +10,11 @@
         android:id="@+id/docView"
         android:layout_width="136dp"
         android:layout_height="59dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="32dp"
-        android:text="Lista lekarzy"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="30dp"
+        android:text="Aktualizuj listę"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView26"
@@ -54,11 +54,11 @@
         android:id="@+id/addDocButton"
         android:layout_width="136dp"
         android:layout_height="59dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="30dp"
         android:text="+ Dodaj lekarza"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/doc_recycler"
@@ -70,7 +70,9 @@
         android:layout_marginBottom="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,15 +7,18 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.text.toSpannable
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class AddDocActivity : AppCompatActivity() {
-    private lateinit var edName: EditText
-    private lateinit var edSpec: EditText
-    private lateinit var edPhone: EditText
-    private lateinit var edEmail: EditText
-    private lateinit var edAdress: EditText
-    private lateinit var edCity: EditText
+    lateinit var edName: EditText
+    lateinit var edSpec: EditText
+    lateinit var edPhone: EditText
+    lateinit var edEmail: EditText
+    lateinit var edAdress: EditText
+    lateinit var edCity: EditText
 
+    private lateinit var recyclerView: RecyclerView
     private lateinit var addBtn: Button
     private lateinit var sqliteHelper: DocDatabaseHelper
 
@@ -28,27 +31,18 @@ class AddDocActivity : AppCompatActivity() {
         setContentView(R.layout.adddoctor)
 
         initView()
+
         sqliteHelper = DocDatabaseHelper(this)
         addBtn.setOnClickListener { addDoc() }
 
-        adapter?.setOnClickItem {
-            doc = it
-            Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
-            edName.setText(it.name)
-            edSpec.setText(it.spec)
-            edPhone.setText(it.phone)
-            edEmail.setText(it.email)
-            edAdress.setText(it.adress)
-            edCity.setText(it.city)
-        }
 
         adapter?.setOnClickUpdateItem { updateDoc() }
 
-        addBtn.setOnClickListener { addDoc() }
+
     }
 
 
-    private fun addDoc() {
+         fun addDoc() {
         val name = edName.text.toString()
         val spec = edSpec.text.toString()
         val phone = edPhone.text.toString()
@@ -74,6 +68,7 @@ class AddDocActivity : AppCompatActivity() {
             if (status > -1) {
                 Toast.makeText(this, "Dodano lekarza!", Toast.LENGTH_SHORT).show()
                 clearEditText()
+//                DocListActivity().getDoc()
             } else {
                 Toast.makeText(this, "Błąd dodawania lekarza", Toast.LENGTH_LONG).show()
             }
@@ -81,7 +76,7 @@ class AddDocActivity : AppCompatActivity() {
 
     }
 
-    private fun updateDoc() {
+         fun updateDoc() {
         val name = edName.text.toString()
         val spec = edSpec.text.toString()
         val phone = edPhone.text.toString()
@@ -106,12 +101,18 @@ class AddDocActivity : AppCompatActivity() {
         val status = sqliteHelper.updateDoc(doc)
         if (status > -1) {
             clearEditText()
+
+//            DocListActivity().getDoc()
+
+
         } else {
             Toast.makeText(this, "Aktualizacja nieduana", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun clearEditText() {
+
+
+   fun clearEditText() {
         edName.setText("")
         edSpec.setText("")
         edPhone.setText("")
@@ -119,6 +120,8 @@ class AddDocActivity : AppCompatActivity() {
         edAdress.setText("")
         edCity.setText("")
     }
+
+
 
 
     private fun initView() {
@@ -129,6 +132,7 @@ class AddDocActivity : AppCompatActivity() {
         edAdress = findViewById(R.id.docAdress)
         edCity = findViewById(R.id.docCity)
         addBtn = findViewById(R.id.saveDoc)
+
     }
 
 }
