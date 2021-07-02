@@ -86,7 +86,7 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
 
 
             val spinner33: Spinner = view.findViewById(R.id.ileedit)
-            val ilerazy = arrayOf("raz dziennie", "2 razy dziennie", "3 razy dziennie", "4 razy dziennie", "5 razy dziennie")
+            val ilerazy = arrayOf("raz dziennie", "2 razy dziennie", "3 razy dziennie")
             val  arrayAdapter33 = ArrayAdapter(ctx, android.R.layout.simple_spinner_item, ilerazy)
 
             spinner33.adapter = arrayAdapter33
@@ -137,6 +137,10 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
 
 
             val godzedit: Button = view.findViewById(R.id.czasedit)
+            val lista2 = mutableListOf<String>()
+
+            var godzina2 = ""
+
 
             godzedit.setOnClickListener {
                 val dpd2 = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
@@ -144,7 +148,9 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
                     kalendarz.set(Calendar.HOUR_OF_DAY, hour)
                     kalendarz.set(Calendar.MINUTE, minute)
 
-                    editGodzina.text = SimpleDateFormat("HH:mm").format(kalendarz.time)
+                    godzina2 = SimpleDateFormat("HH:mm").format(kalendarz.time)
+                    lista2.add(godzina2)
+                    editGodzina.text = (lista2).toString()
                 }
 
                 TimePickerDialog(

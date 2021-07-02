@@ -2,11 +2,13 @@ package edu.ib.medical
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import java.text.SimpleDateFormat
 
 import java.util.*
@@ -36,11 +38,13 @@ class AddMedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.addmed)
+
+
+
+
         addPrzypomnienie()
         addIle_razy()
         addCzestotliowsc()
-        addData()
-        addGodzina()
         addTermin()
         addCzas()
         goListaLek()
@@ -49,6 +53,7 @@ class AddMedActivity : AppCompatActivity() {
         sqliteHelper = MyDataBaseHelper(this)
 
         btnAdd.setOnClickListener { addLek() }
+
 
 
 
@@ -81,9 +86,10 @@ class AddMedActivity : AppCompatActivity() {
 
     private fun addIle_razy() {
 
+
         val rezultat = findViewById<TextView>(R.id.ile_razy)
         val spinner3: Spinner = findViewById(R.id.ile)
-        val ile_razy = arrayOf("raz dziennie", "2 razy dziennie", "3 razy dziennie", "4 razy dziennie", "5 razy dziennie")
+        val ile_razy = arrayOf("raz dziennie", "2 razy dziennie", "3 razy dziennie")
         val arrayAdapter3 = ArrayAdapter(this, android.R.layout.simple_spinner_item, ile_razy)
 
         spinner3.adapter = arrayAdapter3
@@ -94,6 +100,8 @@ class AddMedActivity : AppCompatActivity() {
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
+
+
     }
 
     private fun addCzestotliowsc() {
@@ -116,23 +124,7 @@ class AddMedActivity : AppCompatActivity() {
     }
 
 
-    private fun addData() {
 
-        val data: TextView = findViewById(R.id.wybierzdate)
-        val kalendarz: Calendar = Calendar.getInstance()
-        val format: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
-        val wyswietl = format.format(kalendarz.getTime())
-        data.setText(wyswietl)
-    }
-
-    private fun addGodzina() {
-
-        val godzina: TextView = findViewById(R.id.wybierzgodzine)
-        val kalendarz: Calendar = Calendar.getInstance()
-        val format: SimpleDateFormat = SimpleDateFormat("HH:mm")
-        val wyswietl = format.format(kalendarz.getTime())
-        godzina.setText(wyswietl)
-    }
 
     private fun addTermin() {
 
@@ -165,30 +157,45 @@ class AddMedActivity : AppCompatActivity() {
 
         val kalendarz = Calendar.getInstance()
 
+        val ilosc = findViewById<TextView>(R.id.ile_razy).toString()
+
 
         val wybierzczas: TextView = findViewById(R.id.wybierzgodzine)
+        val lista = mutableListOf<String>()
+
+        var godzina = ""
+
+
+
         val kiedy2: Button = findViewById(R.id.czas)
 
-        kiedy2.setOnClickListener {
-            val dpd2 = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
 
-                kalendarz.set(Calendar.HOUR_OF_DAY, hour)
-                kalendarz.set(Calendar.MINUTE, minute)
+            kiedy2.setOnClickListener {
+                val dpd2 = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
 
-                wybierzczas.text = SimpleDateFormat("HH:mm").format(kalendarz.time)
+                    kalendarz.set(Calendar.HOUR_OF_DAY, hour)
+                    kalendarz.set(Calendar.MINUTE, minute)
+
+                    godzina = SimpleDateFormat("HH:mm").format(kalendarz.time)
+                    lista.add(godzina)
+                    wybierzczas.text = (lista).toString()
+                }
+
+                TimePickerDialog(
+                        this,
+                        dpd2,
+                        kalendarz.get(Calendar.HOUR_OF_DAY),
+                        kalendarz.get(Calendar.MINUTE),
+                        true
+                ).show()
             }
 
-            TimePickerDialog(
-                this,
-                dpd2,
-                kalendarz.get(Calendar.HOUR_OF_DAY),
-                kalendarz.get(Calendar.MINUTE),
-                true
-            ).show()
-        }
+
+
+
+
 
     }
-
 
    private fun addLek() {
 
