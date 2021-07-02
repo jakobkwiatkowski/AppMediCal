@@ -15,7 +15,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"/>
 
     <ImageView
         android:id="@+id/imageView7"
@@ -27,53 +28,69 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/contact" />
 
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_menu_24" />
+
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="101dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="120dp"
+        android:layout_width="135dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="110dp"
+        android:gravity="left|center"
         android:text="Imię i nazwisko"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/docName"
-        android:layout_width="115dp"
+        android:layout_width="210dp"
         android:layout_height="40dp"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textPersonName"
+        android:text="Jakub Kwiatkowski"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView20"
-        android:layout_width="106dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="192dp"
+        android:layout_width="135dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="170dp"
+        android:gravity="left|center"
         android:text="Specjalizacja"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/docSpec"
-        android:layout_width="113dp"
+        android:layout_width="170dp"
         android:layout_height="40dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="250dp"
+        android:gravity="left|center"
         android:text="Dane kontaktowe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,100 +98,109 @@
 
     <TextView
         android:id="@+id/textView22"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="328dp"
+        android:layout_width="135dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="300dp"
+        android:gravity="left|center"
         android:text="Numer telefonu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/docPhone"
-        android:layout_width="100dp"
+        android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_marginTop="320dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textPersonName"
+        android:text="881 778 848"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="380dp"
+        android:layout_width="135dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="360dp"
+        android:gravity="left|center"
         android:text="Adres e-mail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/docEmail"
-        android:layout_width="135dp"
+        android:layout_width="210dp"
         android:layout_height="40dp"
-        android:layout_marginTop="372dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="360dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView24"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="432dp"
+        android:layout_width="135dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="420dp"
+        android:gravity="left|center"
         android:text="Adres"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/docAdress"
-        android:layout_width="135dp"
+        android:layout_width="210dp"
         android:layout_height="40dp"
-        android:layout_marginTop="424dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView25"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="492dp"
+        android:layout_width="135dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="480dp"
+        android:gravity="left|center"
         android:text="Miejscowość"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/docCity"
-        android:layout_width="135dp"
+        android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_marginTop="484dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginTop="480dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"/>
 
     <Button
         android:id="@+id/saveDoc"
         android:layout_width="90dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="32dp"
         android:text="Zapisz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998" />
+        app:layout_constraintVertical_bias="0.908" />
 
     <Button
         android:id="@+id/listadoc"
