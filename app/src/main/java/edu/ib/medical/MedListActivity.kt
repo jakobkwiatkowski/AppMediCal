@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MedListActivity : AppCompatActivity() {
 
 
-    private lateinit var sqliteHelper: MyDataBaseHelper
+    companion object{lateinit var sqliteHelper: MyDataBaseHelper}
     private lateinit var recyclerView: RecyclerView
     private var adapter: LekAdapter? = null
 
@@ -30,13 +30,13 @@ class MedListActivity : AppCompatActivity() {
 
 
 
+        sqliteHelper = MyDataBaseHelper(this)
         initView()
         initRecyclerVew()
-
-        sqliteHelper = MyDataBaseHelper(this)
+        getLek()
         adapter?.setOnClickDeleteItem { deleteLek(it.id) }
 
-        getLek()
+
 
 
     }
@@ -89,7 +89,7 @@ class MedListActivity : AppCompatActivity() {
 
     private fun initRecyclerVew() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = LekAdapter()
+        adapter = LekAdapter(this)
         recyclerView.adapter = adapter
     }
 

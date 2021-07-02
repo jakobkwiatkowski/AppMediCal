@@ -9,22 +9,16 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class AddDocActivity : AppCompatActivity() {
-    lateinit var edName: EditText
-    lateinit var edSpec: EditText
-    lateinit var edPhone: EditText
-    lateinit var edEmail: EditText
-    lateinit var edAdress: EditText
-    lateinit var edCity: EditText
+   private lateinit var edName: EditText
+   private lateinit var edSpec: EditText
+   private lateinit var edPhone: EditText
+   private lateinit var edEmail: EditText
+   private lateinit var edAdress: EditText
+   private lateinit var edCity: EditText
 
-    private lateinit var recyclerView: RecyclerView
     private lateinit var addBtn: Button
     private lateinit var backBtn: Button
     private lateinit var sqliteHelper: DocDatabaseHelper
-
-    private var adapter: DocAdapter? = null
-    private var doc: DocModel? = null
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +26,6 @@ class AddDocActivity : AppCompatActivity() {
         setContentView(R.layout.adddoctor)
 
         goListaDoc()
-
-
 
 
         sqliteHelper = DocDatabaseHelper(this)
@@ -46,7 +38,7 @@ class AddDocActivity : AppCompatActivity() {
 
 
 
-         fun addDoc() {
+     private fun addDoc() {
              val name = edName.text.toString()
              val spec = edSpec.text.toString()
              val phone = edPhone.text.toString()
@@ -88,7 +80,7 @@ class AddDocActivity : AppCompatActivity() {
 
 
 
-   fun clearEditText() {
+   private fun clearEditText() {
         edName.setText("")
         edSpec.setText("")
         edPhone.setText("")
@@ -98,15 +90,15 @@ class AddDocActivity : AppCompatActivity() {
     }
 
 
-    fun goListaDoc() {
+    private fun goListaDoc() {
         val addBack = findViewById<Button>(R.id.listadoc)
         addBack.setOnClickListener {
             val intent = Intent(this, DocListActivity::class.java)
             startActivity(intent)
         }
 
-
     }
+
 
     private fun initView() {
         edName = findViewById(R.id.docName)

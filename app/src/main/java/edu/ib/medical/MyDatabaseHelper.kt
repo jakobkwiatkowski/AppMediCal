@@ -126,25 +126,35 @@ class MyDataBaseHelper(context: Context) :
     }
 
 
-    fun updateLek(lek: LekModel): Int {
+    fun updateLek(lekid:Int, leknazwa:String, lekdawka:String, lekdata:String, lekczesto:String,
+    lekile:String, lekgodzina:String, lekzapas:String, lekkoniec:String): Boolean {
+
         val db = this.writableDatabase
-
         val cv = ContentValues()
-//        cv.put(ID, lek.id)
-        cv.put(NazwaLeku, lek.nazwa)
-        cv.put(Dawka, lek.dawka)
-        cv.put(DataRozpoczecia, lek.data)
-        cv.put(Czestotliwosc, lek.czestotliwosc)
-        cv.put(IleRazy, lek.ileRazy)
-        cv.put(Godzina, lek.godzina)
-        cv.put(ZapasTabletek, lek.zapas)
-        cv.put(KoniecLeku, lek.koniec)
+        var result:Boolean = false
 
-        val success = db.update(TABLE_NAME, cv, "id=" + lek.id, null)
-        db.close()
-        return success
+        cv.put(NazwaLeku, leknazwa)
+        cv.put(Dawka, lekdawka)
+        cv.put(DataRozpoczecia, lekdata)
+        cv.put(Czestotliwosc, lekczesto)
+        cv.put(IleRazy, lekile)
+        cv.put(Godzina, lekgodzina)
+        cv.put(ZapasTabletek, lekzapas)
+        cv.put(KoniecLeku, lekkoniec)
+
+        try {
+            db.update(TABLE_NAME, cv, "id=" + lekid, null)
+            result = true
+        }catch(e: java.lang.Exception){
+            result = false
+        }
+        return result
+
 
     }
+
+
+
 
     fun deleteLekById(id: Int): Int {
         val db = this.writableDatabase

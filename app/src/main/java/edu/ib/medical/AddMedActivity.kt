@@ -5,7 +5,6 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import java.text.SimpleDateFormat
@@ -52,8 +51,6 @@ class AddMedActivity : AppCompatActivity() {
         btnAdd.setOnClickListener { addLek() }
 
 
-        adapter?.setOnClickUpdateItem {
-            updateLek() }
 
 
     }
@@ -193,7 +190,7 @@ class AddMedActivity : AppCompatActivity() {
     }
 
 
-   fun addLek() {
+   private fun addLek() {
 
 
         val nazwa = edNazwa.text.toString()
@@ -232,39 +229,7 @@ class AddMedActivity : AppCompatActivity() {
     }
 
 
-    private fun updateLek() {
-        val nazwa = edNazwa.text.toString()
-        val dawka = edDawka.text.toString()
-        val data = edData.text.toString()
-        val czestotliwosc = edCzestotliwosc.text.toString()
-        val ileRazy = edIleRazy.text.toString()
-        val godzina = edGodzina.text.toString()
 
-        val zapas = edZapas.text.toString()
-        val koniec = edKoniec.text.toString()
-
-        if (nazwa == lek?.nazwa && dawka == lek?.dawka && data == lek?.data && czestotliwosc == lek?.czestotliwosc.toString()
-            && ileRazy == lek?.ileRazy.toString() && godzina == lek?.godzina
-            && zapas == lek?.zapas && koniec == lek?.koniec.toString()
-        ) {
-
-            Toast.makeText(this, "Dane nie zostały zmienione", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (lek == null) return
-        val lek = LekModel(
-            id = lek!!.id, nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
-            ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec
-        )
-
-        val status = sqliteHelper.updateLek(lek)
-        if (status > -1) {
-            clearEditText()
-
-        } else {
-            Toast.makeText(this, "Aktualizacja nieudana", Toast.LENGTH_SHORT).show()
-        }
-    }
 
 
     private fun clearEditText() {

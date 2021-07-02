@@ -14,7 +14,7 @@ class DocListActivity : AppCompatActivity() {
 
     companion object { lateinit var sqliteHelper: DocDatabaseHelper }
 
-    lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private var adapter: DocAdapter? = null
 
 
@@ -79,7 +79,7 @@ class DocListActivity : AppCompatActivity() {
         alert.show()
     }
 
-     fun initRecyclerView() {
+    private fun initRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = DocAdapter(this)
         recyclerView.adapter = adapter
