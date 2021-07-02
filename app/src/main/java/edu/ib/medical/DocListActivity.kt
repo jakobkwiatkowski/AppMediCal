@@ -3,20 +3,19 @@ package edu.ib.medical
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class DocListActivity : AppCompatActivity() {
 
-    lateinit var  sqliteHelper :DocDatabaseHelper
-    private lateinit var recyclerView: RecyclerView
-    private var adapter: DocAdapter? = null
+    companion object { lateinit var sqliteHelper: DocDatabaseHelper }
 
+    lateinit var recyclerView: RecyclerView
+    private var adapter: DocAdapter? = null
 
 
 
@@ -30,12 +29,10 @@ class DocListActivity : AppCompatActivity() {
         sqliteHelper = DocDatabaseHelper(this)
         initView()
         initRecyclerView()
-
+        getDoc()
         adapter?.setOnClickDeleteItem { deleteDoc(it.id) }
 
 
-
-        getDoc()
     }
 
    fun getDoc() {
@@ -84,7 +81,7 @@ class DocListActivity : AppCompatActivity() {
 
      fun initRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = DocAdapter()
+        adapter = DocAdapter(this)
         recyclerView.adapter = adapter
     }
 

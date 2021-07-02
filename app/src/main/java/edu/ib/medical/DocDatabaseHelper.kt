@@ -102,20 +102,26 @@ class DocDatabaseHelper(context: Context) :
         return docList
     }
 
-    fun updateDoc(doc: DocModel): Int {
+    fun updateDoc(docid:Int, docname:String, docspec:String, docphone:String, docemail:String, docadress:String, doccity:String ): Boolean {
         val db = this.writableDatabase
         val cv = ContentValues()
+        var result: Boolean = false
 
-        cv.put(name, doc.name)
-        cv.put(spec, doc.spec)
-        cv.put(phone, doc.phone)
-        cv.put(email, doc.email)
-        cv.put(adress, doc.adress)
-        cv.put(city, doc.city)
+        cv.put(name, docname)
+        cv.put(spec, docspec)
+        cv.put(phone, docphone)
+        cv.put(email, docemail)
+        cv.put(adress, docadress)
+        cv.put(city, doccity)
 
-        val success = db.update(TABLE_NAME, cv, "id=" + doc.id, null)
-        db.close()
-        return success
+        try {
+
+            db.update(TABLE_NAME, cv, "id=" + docid, null)
+            result = true
+        } catch(e: java.lang.Exception){
+            result = false
+        }
+        return result
     }
 
     fun deleteDocById(id: Int): Int {

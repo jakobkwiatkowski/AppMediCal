@@ -42,82 +42,49 @@ class AddDocActivity : AppCompatActivity() {
 
         addBtn.setOnClickListener { addDoc() }
 
-
-
-        adapter?.setOnClickUpdateItem { updateDoc() }
-
     }
+
 
 
          fun addDoc() {
-        val name = edName.text.toString()
-        val spec = edSpec.text.toString()
-        val phone = edPhone.text.toString()
-        val email = edEmail.text.toString()
-        val adress = edAdress.text.toString()
-        val city = edCity.text.toString()
+             val name = edName.text.toString()
+             val spec = edSpec.text.toString()
+             val phone = edPhone.text.toString()
+             val email = edEmail.text.toString()
+             val adress = edAdress.text.toString()
+             val city = edCity.text.toString()
 
-        if (name.isEmpty() || spec.isEmpty() || phone.isEmpty() || email.isEmpty() || adress.isEmpty() || city.isEmpty()) {
-            Toast.makeText(this, "Uzupełnij wszystkie pola", Toast.LENGTH_SHORT).show()
-            return
-        } else {
-            val doc = DocModel(
-                1,
-                name = name,
-                spec = spec,
-                phone = phone,
-                email = email,
-                adress = adress,
-                city = city
-            )
-            val status = sqliteHelper.addDoc(doc)
+             if (name.isEmpty() || spec.isEmpty() || phone.isEmpty() || email.isEmpty() || adress.isEmpty() || city.isEmpty()) {
+                 Toast.makeText(this, "Uzupełnij wszystkie pola", Toast.LENGTH_SHORT).show()
+                 return
+             } else {
+                 val doc = DocModel(
+                     1,
+                     name = name,
+                     spec = spec,
+                     phone = phone,
+                     email = email,
+                     adress = adress,
+                     city = city
+                 )
+                 val status = sqliteHelper.addDoc(doc)
 
-            if (status > -1) {
-                Toast.makeText(this, "Dodano lekarza!", Toast.LENGTH_SHORT).show()
-                clearEditText()
-                backBtn.setOnClickListener {  val intent = Intent(this, DocListActivity::class.java)
-                    startActivity(intent) }
-
-
-            } else {
-                Toast.makeText(this, "Błąd dodawania lekarza", Toast.LENGTH_LONG).show()
-            }
-        }
-
-    }
-
-         fun updateDoc() {
-        val name = edName.text.toString()
-        val spec = edSpec.text.toString()
-        val phone = edPhone.text.toString()
-        val email = edEmail.text.toString()
-        val adress = edAdress.text.toString()
-        val city = edCity.text.toString()
-
-        if (name == doc?.name && spec == doc?.spec && phone == doc?.phone && email == doc?.email && adress == doc?.adress && city == doc?.city) {
-            Toast.makeText(this, "Dane nie zostały zmienione", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (doc == null) return
-        val doc = DocModel(
-            id = doc!!.id,
-            name = name,
-            spec = spec,
-            phone = phone,
-            email = email,
-            adress = adress,
-            city = city
-        )
-        val status = sqliteHelper.updateDoc(doc)
-        if (status > -1) {
-            clearEditText()
+                 if (status > -1) {
+                     Toast.makeText(this, "Dodano lekarza!", Toast.LENGTH_SHORT).show()
+                     clearEditText()
+                     backBtn.setOnClickListener {
+                         val intent = Intent(this, DocListActivity::class.java)
+                         startActivity(intent)
+                     }
 
 
+                 } else {
+                     Toast.makeText(this, "Błąd dodawania lekarza", Toast.LENGTH_LONG).show()
+                 }
+             }
+         }
 
-        } else {
-            Toast.makeText(this, "Aktualizacja nieduana", Toast.LENGTH_SHORT).show()
-        }
-    }
+
 
 
 
