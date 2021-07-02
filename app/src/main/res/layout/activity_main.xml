@@ -100,11 +100,11 @@
         android:layout_width="185dp"
         android:layout_height="30dp"
         android:layout_marginTop="140dp"
+        android:gravity="center"
         android:text="Leki do przyjęcia"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
