@@ -203,7 +203,7 @@ class AddMedActivity : AppCompatActivity() {
 
                 godzina = SimpleDateFormat("HH:mm").format(kalendarz.time)
                 lista.add(godzina)
-                wybierzczas.text = (lista).toString()
+                wybierzczas.text = (lista.toString().replace("[", "").replace("]",""))
             }
 
             TimePickerDialog(

@@ -150,7 +150,7 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
 
                     godzina2 = SimpleDateFormat("HH:mm").format(kalendarz.time)
                     lista2.add(godzina2)
-                    editGodzina.text = (lista2).toString()
+                    editGodzina.text = (lista2.toString().replace("[", "").replace("]",""))
                 }
 
                 TimePickerDialog(
