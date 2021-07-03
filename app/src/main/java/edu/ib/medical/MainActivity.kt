@@ -5,11 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    companion object{lateinit var sqliteHelper: MyDataBaseHelper}
+
+    private lateinit var recyclerView: RecyclerView
+    private var adapter: medAdapter? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,8 +27,29 @@ class MainActivity : AppCompatActivity() {
         goAddMed()
         addData()
 
+        sqliteHelper = MyDataBaseHelper(this)
+        initView()
+        initRecyclerView()
+        getMed()
 
     }
+
+    private fun initRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = medAdapter(this)
+        recyclerView.adapter = adapter
+    }
+
+    private fun initView() {
+        recyclerView = findViewById(R.id.LekRecycler)
+    }
+
+    private fun getMed() {
+        val medlist = sqliteHelper.getAllLeki()
+        adapter?.addItems(medlist)
+    }
+
+
 
     private fun goMenu() {
         val menuButton = findViewById<ImageView>(R.id.menuButton)

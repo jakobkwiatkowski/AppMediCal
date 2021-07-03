@@ -55,11 +55,7 @@ class AddMedActivity : AppCompatActivity() {
         btnAdd.setOnClickListener { addLek() }
 
 
-
-
-
     }
-
 
 
     private fun addPrzypomnienie() {
@@ -68,20 +64,30 @@ class AddMedActivity : AppCompatActivity() {
         val rezultat = findViewById<TextView>(R.id.koniec_leku)
         val spinner5: Spinner = findViewById(R.id.przypomnij)
 
-        val przypomnienie = arrayOf("2 dni przed końcem", "3 dni przed końcem", "4 dni przed końcem", "5 dni przed końcem", "6 dni przed końcem", "7 dni przed końcem")
+        val przypomnienie = arrayOf(
+            "2 dni przed końcem",
+            "3 dni przed końcem",
+            "4 dni przed końcem",
+            "5 dni przed końcem",
+            "6 dni przed końcem",
+            "7 dni przed końcem"
+        )
         val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, przypomnienie)
 
         spinner5.adapter = arrayAdapter
         spinner5.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 rezultat.text = przypomnienie[position]
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
-
-
-
 
 
     private fun addIle_razy() {
@@ -95,9 +101,15 @@ class AddMedActivity : AppCompatActivity() {
         spinner3.adapter = arrayAdapter3
         spinner3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 rezultat.text = ile_razy[position]
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
@@ -108,22 +120,36 @@ class AddMedActivity : AppCompatActivity() {
 
         val rezultat = findViewById<TextView>(R.id.czestotliwosc)
         val spinner2: Spinner = findViewById(R.id.czesto)
-        val czestotliwosc = arrayOf("codziennie", "co 2 dni", "co 3 dni", "co 4 dni", "co 5 dni", "co 6 dni", "co tydzień", "co 2 tygodnie", "co miesiąc")
+        val czestotliwosc = arrayOf(
+            "codziennie",
+            "co 2 dni",
+            "co 3 dni",
+            "co 4 dni",
+            "co 5 dni",
+            "co 6 dni",
+            "co tydzień",
+            "co 2 tygodnie",
+            "co miesiąc"
+        )
         val arrayAdapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, czestotliwosc)
 
         spinner2.adapter = arrayAdapter2
         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
 
                 rezultat.text = czestotliwosc[position]
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
         }
     }
-
-
 
 
     private fun addTermin() {
@@ -166,38 +192,33 @@ class AddMedActivity : AppCompatActivity() {
         var godzina = ""
 
 
-
         val kiedy2: Button = findViewById(R.id.czas)
 
 
-            kiedy2.setOnClickListener {
-                val dpd2 = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+        kiedy2.setOnClickListener {
+            val dpd2 = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
 
-                    kalendarz.set(Calendar.HOUR_OF_DAY, hour)
-                    kalendarz.set(Calendar.MINUTE, minute)
+                kalendarz.set(Calendar.HOUR_OF_DAY, hour)
+                kalendarz.set(Calendar.MINUTE, minute)
 
-                    godzina = SimpleDateFormat("HH:mm").format(kalendarz.time)
-                    lista.add(godzina)
-                    wybierzczas.text = (lista).toString()
-                }
-
-                TimePickerDialog(
-                        this,
-                        dpd2,
-                        kalendarz.get(Calendar.HOUR_OF_DAY),
-                        kalendarz.get(Calendar.MINUTE),
-                        true
-                ).show()
+                godzina = SimpleDateFormat("HH:mm").format(kalendarz.time)
+                lista.add(godzina)
+                wybierzczas.text = (lista).toString()
             }
 
-
-
-
+            TimePickerDialog(
+                this,
+                dpd2,
+                kalendarz.get(Calendar.HOUR_OF_DAY),
+                kalendarz.get(Calendar.MINUTE),
+                true
+            ).show()
+        }
 
 
     }
 
-   private fun addLek() {
+    private fun addLek() {
 
 
         val nazwa = edNazwa.text.toString()
@@ -225,8 +246,10 @@ class AddMedActivity : AppCompatActivity() {
             if (status > -1) {
                 Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show()
                 clearEditText()
-                btnBack.setOnClickListener {  val intent = Intent(this, MedListActivity::class.java)
-                    startActivity(intent) }
+                btnBack.setOnClickListener {
+                    val intent = Intent(this, MedListActivity::class.java)
+                    startActivity(intent)
+                }
 
 
             } else {
@@ -234,9 +257,6 @@ class AddMedActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
 
 
     private fun clearEditText() {

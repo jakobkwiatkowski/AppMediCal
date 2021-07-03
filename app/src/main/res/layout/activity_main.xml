@@ -15,41 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/godzLeku"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Godzina1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283" />
-
-    <ImageView
-        android:id="@+id/ikonaLeku"
-        android:layout_width="30dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="244dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.023"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/_5587" />
-
-    <TextView
-        android:id="@+id/daneLeku"
-        android:layout_width="332dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="16dp"
-        android:text="Nazwa leku, dawka"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37" />
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -90,20 +57,29 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_menu_24" />
 
     <TextView
         android:id="@+id/leki"
-        android:layout_width="185dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="140dp"
+        android:layout_width="184dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="128dp"
         android:gravity="center"
-        android:text="Leki do przyjęcia"
+        android:text="Leki do przyjęcia w dniu dzisiejszym"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/LekRecycler"
+        android:layout_width="405dp"
+        android:layout_height="402dp"
+        android:layout_marginTop="188dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

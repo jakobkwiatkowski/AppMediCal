@@ -233,14 +233,7 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
 
         var btnDelete = view.findViewById<ImageButton>(R.id.usun)
         var btnUpdate = view.findViewById<ImageButton>(R.id.zmien)
-
-
-
     }
-
-
-
-
 }
 
 
