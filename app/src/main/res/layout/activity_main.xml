@@ -6,12 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
+
     <TextView
         android:id="@+id/Data"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="92dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:fontFamily="casual"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,16 +26,21 @@
         android:textSize="18sp"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
         android:text="Nazwa użytkownika"
+        android:textSize="15sp"
+        android:fontFamily="monospace"
+        android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintHorizontal_bias="0.697"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.013" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -43,10 +55,12 @@
 
     <Button
         android:id="@+id/addMedButton2"
-        android:layout_width="122dp"
+        android:layout_width="wrap_content"
         android:layout_height="59dp"
         android:layout_marginBottom="32dp"
+        android:background="@drawable/btn_color2"
         android:text="+ Dodaj lek"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -64,13 +78,16 @@
 
     <TextView
         android:id="@+id/leki"
-        android:layout_width="198dp"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="115dp"
         android:gravity="center"
-        android:text="Leki do przyjęcia w dniu dzisiejszym"
+        android:text="Leki do przyjęcia:"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="20sp"
+        android:textColor="#03a9f4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -83,5 +100,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/user"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

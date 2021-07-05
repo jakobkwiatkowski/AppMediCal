@@ -24,7 +24,7 @@
                 android:layout_marginStart="96dp"
                 android:layout_marginTop="56dp"
                 android:text="Nazwa 1"
-                android:textColor="#0277BD"
+                android:textColor="#039be5"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +41,7 @@
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/godz_txt"

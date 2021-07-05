@@ -9,7 +9,6 @@ class LekModel(
     var nazwa: String,
     var dawka: String,
     var data: String,
-    var czestotliwosc: String,
     var ileRazy: String,
     var godzina: String,
     var zapas: String,

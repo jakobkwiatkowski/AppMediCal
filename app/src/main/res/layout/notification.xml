@@ -24,6 +24,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="296dp"
         android:text="Odłóż 15 min"
+        android:background="@drawable/btn_color2"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -34,6 +36,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="296dp"
         android:text="Pomiń"
+        android:background="@drawable/btn_color2"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -43,6 +47,8 @@
         android:layout_height="45dp"
         android:layout_marginBottom="196dp"
         android:text="Weź"
+        android:background="@drawable/btn_color2"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

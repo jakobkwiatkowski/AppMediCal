@@ -20,10 +20,9 @@ class AddMedActivity : AppCompatActivity() {
     private lateinit var edNazwa: EditText
     private lateinit var edDawka: EditText
     private lateinit var edData: TextView
-    private lateinit var edCzestotliwosc: TextView
     private lateinit var edIleRazy: TextView
     private lateinit var edGodzina: TextView
-    private lateinit var edZapas: EditText
+    private lateinit var edZapas: TextView
     private lateinit var edKoniec: TextView
 
     private lateinit var btnAdd: Button
@@ -44,9 +43,9 @@ class AddMedActivity : AppCompatActivity() {
 
         addPrzypomnienie()
         addIle_razy()
-        addCzestotliowsc()
         addTermin()
         addCzas()
+        addDatakoniec()
         goListaLek()
 
         initView()
@@ -116,40 +115,6 @@ class AddMedActivity : AppCompatActivity() {
 
     }
 
-    private fun addCzestotliowsc() {
-
-        val rezultat = findViewById<TextView>(R.id.czestotliwosc)
-        val spinner2: Spinner = findViewById(R.id.czesto)
-        val czestotliwosc = arrayOf(
-            "codziennie",
-            "co 2 dni",
-            "co 3 dni",
-            "co 4 dni",
-            "co 5 dni",
-            "co 6 dni",
-            "co tydzień",
-            "co 2 tygodnie",
-            "co miesiąc"
-        )
-        val arrayAdapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, czestotliwosc)
-
-        spinner2.adapter = arrayAdapter2
-        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-
-                rezultat.text = czestotliwosc[position]
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-        }
-    }
 
 
     private fun addTermin() {
@@ -165,6 +130,33 @@ class AddMedActivity : AppCompatActivity() {
                 kalendarz.set(Calendar.MONTH, month)
                 kalendarz.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 wybierzdate.text = SimpleDateFormat("dd-MM-yyy").format(kalendarz.time)
+
+            }
+            DatePickerDialog(
+                this,
+                dpd,
+                kalendarz.get(Calendar.YEAR),
+                kalendarz.get(Calendar.MONTH),
+                kalendarz.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+
+    }
+
+
+    private fun addDatakoniec() {
+
+        val kalendarz = Calendar.getInstance()
+        val koniec: TextView = findViewById(R.id.zapas)
+
+        val kiedy: Button = findViewById(R.id.koniecbtn)
+
+        kiedy.setOnClickListener {
+            val dpd = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                kalendarz.set(Calendar.YEAR, year)
+                kalendarz.set(Calendar.MONTH, month)
+                kalendarz.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                koniec.text = SimpleDateFormat("dd-MM-yyy").format(kalendarz.time)
 
             }
             DatePickerDialog(
@@ -224,20 +216,19 @@ class AddMedActivity : AppCompatActivity() {
         val nazwa = edNazwa.text.toString()
         val dawka = edDawka.text.toString()
         val data = edData.text.toString()
-        val czestotliwosc = edCzestotliwosc.text.toString()
         val ileRazy = edIleRazy.text.toString()
         val godzina = edGodzina.text.toString()
         val zapas = edZapas.text.toString()
         val koniec = edKoniec.text.toString()
 
-        if (nazwa.isEmpty() || dawka.isEmpty() || data.isEmpty() || czestotliwosc.isEmpty() || ileRazy.isEmpty()
+        if (nazwa.isEmpty() || dawka.isEmpty() || data.isEmpty() || ileRazy.isEmpty()
             || godzina.isEmpty() || zapas.isEmpty() || koniec.isEmpty()
         ) {
 
             Toast.makeText(this, "Proszę wypełnić wszystkie pola", Toast.LENGTH_SHORT).show()
         } else {
             val lek = LekModel(
-                1, nazwa = nazwa, dawka = dawka, data = data, czestotliwosc = czestotliwosc,
+                1, nazwa = nazwa, dawka = dawka, data = data,
                 ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec
             )
 
@@ -263,7 +254,6 @@ class AddMedActivity : AppCompatActivity() {
         edNazwa.setText("")
         edDawka.setText("")
         edData.setText("")
-        edCzestotliwosc.setText("")
         edIleRazy.setText("")
         edGodzina.setText("")
 
@@ -277,7 +267,6 @@ class AddMedActivity : AppCompatActivity() {
         edNazwa = findViewById(R.id.nazwa_leku)
         edDawka = findViewById(R.id.dawka)
         edData = findViewById(R.id.wybierzdate)
-        edCzestotliwosc = findViewById(R.id.czestotliwosc)
         edIleRazy = findViewById(R.id.ile_razy)
         edGodzina = findViewById(R.id.wybierzgodzine)
 

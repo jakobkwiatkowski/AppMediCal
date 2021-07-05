@@ -33,9 +33,22 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="2dp"
                 android:text="Nazwa 1"
-                android:textColor="#0277BD"
+                android:textColor="#039be5"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="35dp"
+                android:text="Dawka leku:"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,11 +56,24 @@
                 android:id="@+id/dawka_leku_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginTop="35dp"
                 android:text="Dawka 1"
                 android:textColor="#000"
                 android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/datxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="68dp"
+                android:text="Od (data):"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +82,7 @@
                 android:id="@+id/data_rozpoczecia_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="96dp"
                 android:layout_marginTop="68dp"
                 android:text="Data 1"
                 android:textColor="#000"
@@ -65,15 +91,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+
             <TextView
-                android:id="@+id/czestotliwosc_txt"
+                android:id="@+id/irtxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="101dp"
-                android:text="Częstotliwość 1"
+                android:text="Dzienna częstotliwość:"
                 android:textColor="#000"
                 android:textSize="16sp"
+                android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,11 +109,23 @@
                 android:id="@+id/ile_razy_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="134dp"
+                android:layout_marginStart="186dp"
+                android:layout_marginTop="101dp"
                 android:text="Ile razy 1"
                 android:textColor="#000"
                 android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/gtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="134dp"
+                android:text="Godziny:"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,8 +133,8 @@
                 android:id="@+id/godzina_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="167dp"
+                android:layout_marginStart="87dp"
+                android:layout_marginTop="134dp"
                 android:text="Godzina 1"
                 android:textColor="#000"
                 android:textSize="16sp"
@@ -102,23 +142,38 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/zapas_tabletek_txt"
+                android:id="@+id/dktxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="200dp"
-                android:text="Zapas tabletek 1"
+                android:layout_marginTop="167dp"
+                android:text="Do (data):"
                 android:textColor="#000"
                 android:textSize="16sp"
-                android:visibility="gone"
+                android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/zapas_tabletek_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="167dp"
+                android:text="Data 2"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
 
             <TextView
                 android:id="@+id/koniec_leku_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="95dp"
                 android:layout_marginTop="233dp"
                 android:text="Koniec leku 1"
                 android:textColor="#000"

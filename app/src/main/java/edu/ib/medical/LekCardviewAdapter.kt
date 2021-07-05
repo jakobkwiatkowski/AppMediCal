@@ -9,8 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class medAdapter(con: Context): RecyclerView.Adapter<medAdapter.medViewHolder>(){
+    val con = con
 
     private var medlist: ArrayList<LekModel> = ArrayList()
 
@@ -25,9 +29,11 @@ class medAdapter(con: Context): RecyclerView.Adapter<medAdapter.medViewHolder>()
     override fun onBindViewHolder(holder: medAdapter.medViewHolder, position: Int) {
         val med = medlist[position]
 
-        holder.nazwa.text = med.nazwa
-        holder.godz.text = med.godzina
-        holder.dawka.text = med.dawka
+            holder.nazwa.text = med.nazwa
+            holder.godz.text = med.godzina
+            holder.dawka.text = med.dawka
+
+
 
     }
 
@@ -39,6 +45,7 @@ class medAdapter(con: Context): RecyclerView.Adapter<medAdapter.medViewHolder>()
         var nazwa = view.findViewById<TextView>(R.id.nazwa_txt)
         var godz = view.findViewById<TextView>(R.id.godz_txt)
         var dawka = view.findViewById<TextView>(R.id.dawka_txt)
+
     }
 
 

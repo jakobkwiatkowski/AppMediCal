@@ -5,6 +5,10 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.TextView
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MyDataBaseHelper(context: Context) :
@@ -18,11 +22,8 @@ class MyDataBaseHelper(context: Context) :
         private const val NazwaLeku = "nazwa_leku"
         private const val Dawka = "dawka_leku"
         private const val DataRozpoczecia = "data"
-        private const val Czestotliwosc = "czestotliwosc"
         private const val IleRazy = "ile_razy"
         private const val Godzina = "godzina"
-
-        //        private const val Przypomnienie = "przypomnienie"
         private const val ZapasTabletek = "zapas_tabletek"
         private const val KoniecLeku = "koniec"
     }
@@ -33,7 +34,6 @@ class MyDataBaseHelper(context: Context) :
                 NazwaLeku + " TEXT," +
                 Dawka + " TEXT," +
                 DataRozpoczecia + " TEXT," +
-                Czestotliwosc + " TEXT," +
                 IleRazy + " TEXT," +
                 Godzina + " TEXT," +
                 ZapasTabletek + " TEXT," +
@@ -50,14 +50,12 @@ class MyDataBaseHelper(context: Context) :
         val db: SQLiteDatabase = this.writableDatabase
         val cv = ContentValues()
 
-//        cv.put(ID, lek.id)
+
         cv.put(NazwaLeku, lek.nazwa)
         cv.put(Dawka, lek.dawka)
         cv.put(DataRozpoczecia, lek.data)
-        cv.put(Czestotliwosc, lek.czestotliwosc)
         cv.put(IleRazy, lek.ileRazy)
         cv.put(Godzina, lek.godzina)
-//        cv.put(Przypomnienie, lek.przypomnienie)
         cv.put(ZapasTabletek, lek.zapas)
         cv.put(KoniecLeku, lek.koniec)
 
@@ -87,10 +85,8 @@ class MyDataBaseHelper(context: Context) :
         var nazwa: String
         var dawka: String
         var data: String
-        var czestotliwosc: String
         var ileRazy: String
         var godzina: String
-//        var przypomnienie: String
         var zapas: String
         var koniec: String
 
@@ -102,7 +98,6 @@ class MyDataBaseHelper(context: Context) :
                 nazwa = cursor.getString(cursor.getColumnIndex("nazwa_leku"))
                 dawka = cursor.getString(cursor.getColumnIndex("dawka_leku"))
                 data = cursor.getString(cursor.getColumnIndex("data"))
-                czestotliwosc = cursor.getString(cursor.getColumnIndex("czestotliwosc"))
                 ileRazy = cursor.getString(cursor.getColumnIndex("ile_razy"))
                 godzina = cursor.getString(cursor.getColumnIndex("godzina"))
                 zapas = cursor.getString(cursor.getColumnIndex("zapas_tabletek"))
@@ -113,7 +108,6 @@ class MyDataBaseHelper(context: Context) :
                     nazwa = nazwa,
                     dawka = dawka,
                     data = data,
-                    czestotliwosc = czestotliwosc,
                     ileRazy = ileRazy,
                     godzina = godzina,
                     zapas = zapas,
@@ -125,8 +119,73 @@ class MyDataBaseHelper(context: Context) :
         return lekList
     }
 
+    fun getAllLeki2(): ArrayList<LekModel> {
 
-    fun updateLek(lekid:Int, leknazwa:String, lekdawka:String, lekdata:String, lekczesto:String,
+
+
+        val lekList: ArrayList<LekModel> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_NAME"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var id: Int
+        var nazwa: String
+        var dawka: String
+        var data: String
+        var ileRazy: String
+        var godzina: String
+        var zapas: String
+        var koniec: String
+
+        val kalendarz: Calendar = Calendar.getInstance()
+        val format: SimpleDateFormat =  SimpleDateFormat("dd-MM-yyyy")
+        val today= format.format(kalendarz.getTime())
+        if (cursor.moveToFirst()) {
+
+            do {
+                id = cursor.getInt(cursor.getColumnIndex("id"))
+                nazwa = cursor.getString(cursor.getColumnIndex("nazwa_leku"))
+                dawka = cursor.getString(cursor.getColumnIndex("dawka_leku"))
+                data = cursor.getString(cursor.getColumnIndex("data"))
+                ileRazy = cursor.getString(cursor.getColumnIndex("ile_razy"))
+                godzina = cursor.getString(cursor.getColumnIndex("godzina"))
+                zapas = cursor.getString(cursor.getColumnIndex("zapas_tabletek"))
+                koniec = cursor.getString(cursor.getColumnIndex("koniec"))
+
+                val lek = LekModel(
+                    id = id,
+                    nazwa = nazwa,
+                    dawka = dawka,
+                    data = data,
+                    ileRazy = ileRazy,
+                    godzina = godzina,
+                    zapas = zapas,
+                    koniec = koniec
+                )
+
+                if(data <= today && data <= zapas) {
+                    lekList.add(lek)
+
+                }
+
+
+            }while (cursor.moveToNext())
+        }
+        return lekList
+    }
+
+
+    fun updateLek(lekid:Int, leknazwa:String, lekdawka:String, lekdata:String,
     lekile:String, lekgodzina:String, lekzapas:String, lekkoniec:String): Boolean {
 
         val db = this.writableDatabase
@@ -136,7 +195,6 @@ class MyDataBaseHelper(context: Context) :
         cv.put(NazwaLeku, leknazwa)
         cv.put(Dawka, lekdawka)
         cv.put(DataRozpoczecia, lekdata)
-        cv.put(Czestotliwosc, lekczesto)
         cv.put(IleRazy, lekile)
         cv.put(Godzina, lekgodzina)
         cv.put(ZapasTabletek, lekzapas)

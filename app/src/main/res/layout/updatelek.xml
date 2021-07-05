@@ -16,16 +16,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/zapasedit"
-        android:layout_width="100dp"
+        android:layout_width="115dp"
         android:layout_height="40dp"
         android:layout_marginTop="450dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/dawkaedit"
@@ -38,22 +41,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textVieww1"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+    <Button
+        android:id="@+id/zapasbtnedit"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="455dp"
-        android:text="Zapas tabletek:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="445dp"
+        android:background="@drawable/btn_color"
+        android:text="Data zakończenia"
+        app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textVieww2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="390dp"
         android:text="POWIADOMIENIA"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
@@ -66,7 +71,7 @@
         android:layout_width="160dp"
         android:layout_height="40dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="300dp"
         android:background="@drawable/border"
         android:gravity="center"
         android:textSize="16sp"
@@ -106,6 +111,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="150dp"
         android:text="Data rozpoczęcia"
+        android:background="@drawable/btn_color"
+        app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,9 +133,11 @@
         android:id="@+id/czasedit"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="290dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/btn_color"
         android:text="Wybierz godziny"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -136,7 +145,7 @@
         android:id="@+id/przypomnijedit"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginTop="510dp"
+        android:layout_marginTop="520dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -147,25 +156,6 @@
         android:layout_height="12dp"
         android:layout_marginTop="528dp"
         android:layout_marginEnd="4dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/czestoedit"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/czestotliwoscedit"
-        android:layout_width="0dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginEnd="16dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -185,7 +175,7 @@
         android:id="@+id/ileedit"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="240dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -195,19 +185,8 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="240dp"
         android:text="Ile razy dziennie:"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textVieww6"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="230dp"
-        android:text="Jak często:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -217,7 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="510dp"
+        android:layout_marginTop="520dp"
         android:text="Przypomnij:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"

@@ -48,7 +48,6 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
         holder.nazwa.text = lek.nazwa
         holder.dawka.text = lek.dawka
         holder.data.text = lek.data
-        holder.czestotliwosc.text = lek.czestotliwosc
         holder.ileRazy.text = lek.ileRazy
         holder.godzina.text = lek.godzina
         holder.zapas.text = lek.zapas
@@ -64,25 +63,12 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
             val editNazwa: TextView = view.findViewById(R.id.nazwalekuedit)
             val editDawka: TextView = view.findViewById(R.id.dawkaedit)
             val editData: TextView = view.findViewById(R.id.wybierzdateedit)
-            val editCzesto: TextView = view.findViewById(R.id.czestotliwoscedit)
             val editIlerazy: TextView = view.findViewById(R.id.ilerazyedit)
             val editGodzina: TextView = view.findViewById(R.id.wybierzgodzineedit)
             val editZapas: TextView = view.findViewById(R.id.zapasedit)
             val editKoniec: TextView = view.findViewById(R.id.konieclekuedit)
 
 
-            val spinner22: Spinner = view.findViewById(R.id.czestoedit)
-            val czesto = arrayOf("codziennie", "co 2 dni", "co 3 dni", "co 4 dni", "co 5 dni", "co 6 dni", "co tydzień", "co 2 tygodnie", "co miesiąc")
-            val  arrayAdapter22 = ArrayAdapter(ctx, android.R.layout.simple_spinner_item, czesto)
-
-            spinner22.adapter = arrayAdapter22
-            spinner22.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    editCzesto.text = czesto[position]
-                }
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
 
 
             val spinner33: Spinner = view.findViewById(R.id.ileedit)
@@ -164,10 +150,30 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
 
 
 
+            val kiedyedit2: Button = view.findViewById(R.id.zapasbtnedit)
+
+            kiedyedit2.setOnClickListener {
+                val dpd = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    kalendarz.set(Calendar.YEAR, year)
+                    kalendarz.set(Calendar.MONTH, month)
+                    kalendarz.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                    editZapas.text = SimpleDateFormat("dd-MM-yyy").format(kalendarz.time)
+
+                }
+                DatePickerDialog(
+                    ctx,
+                    dpd,
+                    kalendarz.get(Calendar.YEAR),
+                    kalendarz.get(Calendar.MONTH),
+                    kalendarz.get(Calendar.DAY_OF_MONTH)
+                ).show()
+            }
+
+
+
             editNazwa.text = lek.nazwa
             editDawka.text = lek.dawka
             editData.text = lek.data
-            editCzesto.text = lek.czestotliwosc
             editIlerazy.text = lek.ileRazy
             editGodzina.text = lek.godzina
             editZapas.text = lek.zapas
@@ -182,7 +188,6 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
                         editNazwa.text.toString(),
                         editDawka.text.toString(),
                         editData.text.toString(),
-                        editCzesto.text.toString(),
                         editIlerazy.text.toString(),
                         editGodzina.text.toString(),
                         editZapas.text.toString(),
@@ -193,7 +198,6 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
                         lekList[position].nazwa = editNazwa.text.toString()
                         lekList[position].dawka = editDawka.text.toString()
                         lekList[position].data = editData.text.toString()
-                        lekList[position].czestotliwosc = editCzesto.text.toString()
                         lekList[position].ileRazy = editIlerazy.text.toString()
                         lekList[position].godzina = editGodzina.text.toString()
                         lekList[position].zapas = editZapas.text.toString()
@@ -225,7 +229,6 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
         var nazwa = view.findViewById<TextView>(R.id.nazwa_leku_txt)
         var dawka = view.findViewById<TextView>(R.id.dawka_leku_txt)
         var data = view.findViewById<TextView>(R.id.data_rozpoczecia_txt)
-        var czestotliwosc =  view.findViewById<TextView>(R.id.czestotliwosc_txt)
         var ileRazy =  view.findViewById<TextView>(R.id.ile_razy_txt)
         var godzina =  view.findViewById<TextView>(R.id.godzina_txt)
         var zapas =  view.findViewById<TextView>(R.id.zapas_tabletek_txt)
