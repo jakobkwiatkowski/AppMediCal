@@ -8,6 +8,8 @@ import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.provider.CalendarContract
+import androidx.core.content.ContextCompat.startActivity
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -64,11 +66,35 @@ class MyDataBaseHelper(context: Context) :
 
         val succes = db.insert(TABLE_NAME, null, cv)
 
+        addEvent(lek.nazwa, lek.zapas, lek.koniec)
         db.close()
         return succes
     }
 
+    private fun addEvent(nazwa: String, zapas: String, koniec: String) {
 
+        val day = zapas.substring(0,2).toInt()
+        val month = zapas.substring(3,5).toInt()
+        val year = zapas.substring(6,10).toInt()
+        var evDate = Calendar.getInstance()
+
+
+        val days = koniec.substring(0,1).toInt()
+        evDate.set(year, month, day, 0, 0,0)
+
+        val endDate = evDate.timeInMillis
+        val sttime = evDate.timeInMillis - (2678400000 + 1000*60*60*24*days)
+
+        val intent = Intent(Intent.ACTION_INSERT)
+        intent.setData(CalendarContract.Events.CONTENT_URI)
+        intent.putExtra(CalendarContract.Events.TITLE, "$nazwa")
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,  sttime)
+        intent.putExtra(CalendarContract.Events.ALL_DAY, true)
+        //intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, sttime+1000*60*60)
+        intent.putExtra(CalendarContract.Events.DESCRIPTION, "Uzupełnij zapas leku $nazwa")
+
+        startActivity(ctx, intent, null)
+    }
 
 
     fun getAllLeki(): ArrayList<LekModel> {

@@ -236,7 +236,6 @@ class AddMedActivity : AppCompatActivity() {
             if (status > -1) {
                 Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show()
 
-                alarm(godzina, nazwa)
                 clearEditText()
                 btnBack.setOnClickListener {
                     val intent = Intent(this, MedListActivity::class.java)
@@ -287,55 +286,6 @@ class AddMedActivity : AppCompatActivity() {
         }
 
     }
-
-
-    fun alarm(godzina: String, nazwa: String) {
-
-        val intents = arrayOfNulls<Intent>(2)
-
-        val hourNum = godzina?.filter { it == ',' }?.count()
-
-        if (hourNum == 0) {
-            val h = godzina?.substring(0, 2)?.toInt()
-            val m = godzina?.substring(3, 5)?.toInt()
-            val intent = Intent(AlarmClock.ACTION_SET_ALARM)
-            intent.putExtra(AlarmClock.EXTRA_HOUR, h)
-            intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
-            intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
-            startActivity(intent)
-
-
-        } else if (hourNum == 1) {
-
-            val h = godzina?.substring(0, 2)?.toInt()
-            val m = godzina?.substring(3, 5)?.toInt()
-            val intent = Intent(AlarmClock.ACTION_SET_ALARM)
-            intent.putExtra(AlarmClock.EXTRA_HOUR, h)
-            intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
-            intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
-
-            intents[0]= intent
-
-
-            val h2 = godzina?.substring(7, 9)?.toInt()
-            val m2 = godzina?.substring(10, 12)?.toInt()
-            val intent2 = Intent(AlarmClock.ACTION_SET_ALARM)
-            intent2.putExtra(AlarmClock.EXTRA_HOUR, h2)
-            intent2.putExtra(AlarmClock.EXTRA_MINUTES, m2)
-            intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 2)")
-            intents[1] = intent
-
-
-            startActivities(intents)
-
-        }
-
-
-    }
-
-
-
-
 }
 
 
