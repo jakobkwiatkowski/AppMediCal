@@ -16,11 +16,11 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>(){
+class LekAdapter(ctx: Context) : RecyclerView.Adapter<LekAdapter.LekViewHolder>() {
 
     val ctx = ctx
     private var lekList: ArrayList<LekModel> = ArrayList()
-    private var onClickDeleteItem:((LekModel) ->Unit)? = null
+    private var onClickDeleteItem: ((LekModel) -> Unit)? = null
 
 
     fun addItems(items: ArrayList<LekModel>) {
@@ -28,19 +28,13 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
         notifyDataSetChanged()
     }
 
-
-
-
-    fun setOnClickDeleteItem(callback:(LekModel)->Unit){
+    fun setOnClickDeleteItem(callback: (LekModel) -> Unit) {
         this.onClickDeleteItem = callback
     }
 
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = LekViewHolder (
-            LayoutInflater.from(parent.context).inflate(R.layout.card_view, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = LekViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.card_view, parent, false)
     )
-
 
     override fun onBindViewHolder(holder: LekViewHolder, position: Int) {
         val lek = lekList[position]
@@ -52,8 +46,6 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
         holder.godzina.text = lek.godzina
         holder.zapas.text = lek.zapas
         holder.koniec.text = lek.koniec
-
-
         holder.btnDelete.setOnClickListener { onClickDeleteItem?.invoke(lek) }
 
         holder.btnUpdate.setOnClickListener {
@@ -67,38 +59,51 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
             val editGodzina: TextView = view.findViewById(R.id.wybierzgodzineedit)
             val editZapas: TextView = view.findViewById(R.id.zapasedit)
             val editKoniec: TextView = view.findViewById(R.id.konieclekuedit)
-
-
-
-
             val spinner33: Spinner = view.findViewById(R.id.ileedit)
+
             val ilerazy = arrayOf("raz dziennie", "2 razy dziennie", "3 razy dziennie")
-            val  arrayAdapter33 = ArrayAdapter(ctx, android.R.layout.simple_spinner_item, ilerazy)
+            val arrayAdapter33 = ArrayAdapter(ctx, android.R.layout.simple_spinner_item, ilerazy)
 
             spinner33.adapter = arrayAdapter33
             spinner33.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
                     editIlerazy.text = ilerazy[position]
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
-
             val spinner44: Spinner = view.findViewById(R.id.przypomnijedit)
-            val koniec = arrayOf("2 dni przed końcem", "3 dni przed końcem", "4 dni przed końcem", "5 dni przed końcem", "6 dni przed końcem", "7 dni przed końcem")
-            val  arrayAdapter44 = ArrayAdapter(ctx, android.R.layout.simple_spinner_item, koniec)
+            val koniec = arrayOf(
+                "2 dni przed końcem",
+                "3 dni przed końcem",
+                "4 dni przed końcem",
+                "5 dni przed końcem",
+                "6 dni przed końcem",
+                "7 dni przed końcem"
+            )
+            val arrayAdapter44 = ArrayAdapter(ctx, android.R.layout.simple_spinner_item, koniec)
 
             spinner44.adapter = arrayAdapter44
             spinner44.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
                     editKoniec.text = koniec[position]
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
-
-
 
             val kalendarz = Calendar.getInstance()
 
@@ -124,9 +129,7 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
 
             val godzedit: Button = view.findViewById(R.id.czasedit)
             val lista2 = mutableListOf<String>()
-
             var godzina2 = ""
-
 
             godzedit.setOnClickListener {
                 val dpd2 = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
@@ -136,7 +139,7 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
 
                     godzina2 = SimpleDateFormat("HH:mm").format(kalendarz.time)
                     lista2.add(godzina2)
-                    editGodzina.text = (lista2.toString().replace("[", "").replace("]",""))
+                    editGodzina.text = (lista2.toString().replace("[", "").replace("]", ""))
                 }
 
                 TimePickerDialog(
@@ -148,8 +151,6 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
                 ).show()
             }
 
-
-
             val kiedyedit2: Button = view.findViewById(R.id.zapasbtnedit)
 
             kiedyedit2.setOnClickListener {
@@ -158,7 +159,6 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
                     kalendarz.set(Calendar.MONTH, month)
                     kalendarz.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                     editZapas.text = SimpleDateFormat("dd-MM-yyy").format(kalendarz.time)
-
                 }
                 DatePickerDialog(
                     ctx,
@@ -168,8 +168,6 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
                     kalendarz.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
-
-
 
             editNazwa.text = lek.nazwa
             editDawka.text = lek.dawka
@@ -210,7 +208,6 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
                     }
 
                 }).setNegativeButton("Zamknij", DialogInterface.OnClickListener { dialog, which ->
-
                 })
             val alert = builder.create()
             alert.show()
@@ -222,18 +219,16 @@ class LekAdapter(ctx: Context): RecyclerView.Adapter<LekAdapter.LekViewHolder>()
         return lekList.size
     }
 
-
-    class LekViewHolder(var view:View): RecyclerView.ViewHolder(view){
+    class LekViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
         var id = view.findViewById<TextView>(R.id.id_leku_txt)
         var nazwa = view.findViewById<TextView>(R.id.nazwa_leku_txt)
         var dawka = view.findViewById<TextView>(R.id.dawka_leku_txt)
         var data = view.findViewById<TextView>(R.id.data_rozpoczecia_txt)
-        var ileRazy =  view.findViewById<TextView>(R.id.ile_razy_txt)
-        var godzina =  view.findViewById<TextView>(R.id.godzina_txt)
-        var zapas =  view.findViewById<TextView>(R.id.zapas_tabletek_txt)
+        var ileRazy = view.findViewById<TextView>(R.id.ile_razy_txt)
+        var godzina = view.findViewById<TextView>(R.id.godzina_txt)
+        var zapas = view.findViewById<TextView>(R.id.zapas_tabletek_txt)
         var koniec = view.findViewById<TextView>(R.id.koniec_leku_txt)
-
         var btnDelete = view.findViewById<ImageButton>(R.id.usun)
         var btnUpdate = view.findViewById<ImageButton>(R.id.zmien)
     }

@@ -14,13 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MedListActivity : AppCompatActivity() {
 
+    companion object {
+        lateinit var sqliteHelper: MyDataBaseHelper
+    }
 
-    companion object{lateinit var sqliteHelper: MyDataBaseHelper}
     private lateinit var recyclerView: RecyclerView
     private var adapter: LekAdapter? = null
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,24 +27,17 @@ class MedListActivity : AppCompatActivity() {
         goMenu()
         goAddMed()
 
-
-
         sqliteHelper = MyDataBaseHelper(this)
         initView()
         initRecyclerVew()
         getLek()
         adapter?.setOnClickDeleteItem { deleteLek(it.id) }
-
-
-
-
     }
 
-         fun getLek() {
+    fun getLek() {
         val lekList = sqliteHelper.getAllLeki()
         adapter?.addItems(lekList)
     }
-
 
     private fun goMenu() {
         val menuButton = findViewById<ImageView>(R.id.menuButton2)
@@ -55,7 +47,6 @@ class MedListActivity : AppCompatActivity() {
         }
     }
 
-
     private fun goAddMed() {
         val addMedButton = findViewById<Button>(R.id.addMedButton)
         addMedButton.setOnClickListener {
@@ -64,12 +55,7 @@ class MedListActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-
     private fun deleteLek(id: Int) {
-
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Czy na pewno chcesz usunąć ten lek?")
         builder.setCancelable(true)
@@ -77,7 +63,6 @@ class MedListActivity : AppCompatActivity() {
             sqliteHelper.deleteLekById(id)
             getLek()
             dialog.dismiss()
-
         }
         builder.setNegativeButton("Nie") { dialog, _ ->
             dialog.dismiss()
@@ -85,7 +70,6 @@ class MedListActivity : AppCompatActivity() {
         val alert = builder.create()
         alert.show()
     }
-
 
     private fun initRecyclerVew() {
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -95,11 +79,7 @@ class MedListActivity : AppCompatActivity() {
 
     private fun initView() {
         recyclerView = findViewById(R.id.recycler_view)
-
-
     }
-
-
 }
 
 

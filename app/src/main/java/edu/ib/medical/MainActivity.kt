@@ -20,14 +20,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private var adapter: medAdapter? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         goMenu()
         goAddMed()
         addData()
-
 
         mysqliteHelper = UserDatabase(this)
         goaddUserName()
@@ -37,29 +35,21 @@ class MainActivity : AppCompatActivity() {
         initView()
         initRecyclerView()
         getMed()
-
     }
 
     private fun initRecyclerView() {
-
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = medAdapter(this)
         recyclerView.adapter = adapter
-
     }
 
     private fun initView() {
         recyclerView = findViewById(R.id.LekRecycler)
     }
 
-
     private fun getMed() {
-
-
         val medlist = sqliteHelper.getAllLeki2()
         adapter?.addItems(medlist)
-
-
     }
 
     private fun goMenu() {
@@ -79,7 +69,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addData() {
-
         val data: TextView = findViewById(R.id.Data)
         val kalendarz: Calendar = Calendar.getInstance()
         val format: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
@@ -87,29 +76,19 @@ class MainActivity : AppCompatActivity() {
         data.setText(wyswietl)
     }
 
-
     fun goaddUserName() {
-
         val editbtn = findViewById<ImageButton>(R.id.user)
 
         editbtn.setOnClickListener {
             val intent = Intent(this, User::class.java)
             startActivity(intent)
-
-
         }
-
-
     }
-
 
     fun displayUserName() {
         val name = findViewById<TextView>(R.id.username)
 
         val rezultat = mysqliteHelper.getUser()
         name.text = rezultat
-
-
     }
-
 }

@@ -18,26 +18,18 @@ class User : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
-
         initView()
         mysqliteHelper = UserDatabase(this)
         goMA()
         btnAddUser.setOnClickListener { addUser() }
     }
 
-
     private fun addUser() {
-
-
         val nameofuser = edNameUser.text.toString()
 
-
         if (nameofuser.isEmpty()) {
-
             Toast.makeText(this, "Proszę wpisać nazwę użytkownika", Toast.LENGTH_SHORT).show()
         } else {
-
-
             val status = mysqliteHelper.addUser(nameofuser)
 
             if (status > -1) {
@@ -47,20 +39,15 @@ class User : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }
-
-
             } else {
                 Toast.makeText(this, "Nie dodano użytkownika", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-
     private fun clearEditText() {
         edNameUser.setText("")
-
     }
-
 
     private fun initView() {
         edNameUser = findViewById(R.id.editusername)
@@ -68,7 +55,7 @@ class User : AppCompatActivity() {
         btnExit = findViewById(R.id.exitbutton)
     }
 
-    private fun goMA(){
+    private fun goMA() {
         val btnExit = findViewById<Button>(R.id.exitbutton)
         btnExit.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TestResultsActivity : AppCompatActivity() {
 
@@ -28,46 +30,54 @@ class TestResultsActivity : AppCompatActivity() {
         setContentView(R.layout.testresults)
         val takePictureBTN = findViewById<Button>(R.id.takePicture)
         val folderBTN = findViewById<Button>(R.id.openFolder)
-
         goMenu()
 
-        takePictureBTN.setOnClickListener{
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), cameraRequest)
+        takePictureBTN.setOnClickListener {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                cameraRequest
+            )
             goTakePicture()
         }
-
-        folderBTN.setOnClickListener{ openFolder() }
-
+        folderBTN.setOnClickListener { openFolder() }
     }
 
-    private fun goTakePicture(){
+    private fun goTakePicture() {
 
         val camerabutton = findViewById<Button>(R.id.takePicture)
         var photoFile: File? = null
 
         if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.CAMERA)
-            == PackageManager.PERMISSION_DENIED)
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), cameraRequest)
+            == PackageManager.PERMISSION_DENIED
+        )
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                cameraRequest
+            )
 
-        camerabutton.setOnClickListener{
+        camerabutton.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            try{
+            try {
                 photoFile = createImageFile()
                 startActivityForResult(intent, 1)
-            }catch(e: IOException){}
-            if(photoFile != null){
+            } catch (e: IOException) {
+            }
+            if (photoFile != null) {
                 val photoUri = FileProvider.getUriForFile(
                     this, "com.example.android.fileprovider1", photoFile!!
                 )
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
-                startActivityForResult(intent,REQUEST_IMAGE_CAPTURE)
+                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
             }
 
         }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             val picture = findViewById<ImageView>(R.id.picture)
             //picture.rotation = 90f
             picture.setImageURI(Uri.parse(photoPath))
@@ -75,14 +85,10 @@ class TestResultsActivity : AppCompatActivity() {
     }
 
     private fun createImageFile(): File? {
-        val fileName = "Wyniki"
+        val time = SimpleDateFormat("dd-MM-yyyy_HH:mm").format(Date())
+        val fileName = "Badanie_$time"
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val image = File.createTempFile(
-            fileName,
-            ".jpg",
-            storageDir
-        )
-
+        val image = File(storageDir, fileName + ".jpg")
         photoPath = image.absolutePath
         return image
     }

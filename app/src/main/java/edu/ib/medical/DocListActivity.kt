@@ -12,35 +12,28 @@ import androidx.recyclerview.widget.RecyclerView
 
 class DocListActivity : AppCompatActivity() {
 
-    companion object { lateinit var sqliteHelper: DocDatabaseHelper }
+    companion object {
+        lateinit var sqliteHelper: DocDatabaseHelper
+    }
 
     private lateinit var recyclerView: RecyclerView
     private var adapter: DocAdapter? = null
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.listdoctor)
-
         goMenu()
         goAddDoc()
-
         sqliteHelper = DocDatabaseHelper(this)
         initView()
         initRecyclerView()
         getDoc()
         adapter?.setOnClickDeleteItem { deleteDoc(it.id) }
-
-
     }
 
-   fun getDoc() {
-
+    fun getDoc() {
         val docList = sqliteHelper.getAllDocs()
         adapter?.addItems(docList)
-
-
     }
 
     private fun goMenu() {
@@ -59,14 +52,12 @@ class DocListActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun deleteDoc(id: Int) {
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Czy na pewno usunąć lekarza?")
         builder.setCancelable(true)
         builder.setPositiveButton("tak") { dialog, _ ->
-            var sqliteHelper:DocDatabaseHelper
+            var sqliteHelper: DocDatabaseHelper
             sqliteHelper = DocDatabaseHelper(this)
             sqliteHelper.deleteDocById(id)
             getDoc()
@@ -85,11 +76,7 @@ class DocListActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
     }
 
-
     private fun initView() {
         recyclerView = findViewById(R.id.doc_recycler)
-
     }
-
-
 }

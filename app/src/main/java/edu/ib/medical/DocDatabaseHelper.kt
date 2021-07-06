@@ -102,7 +102,15 @@ class DocDatabaseHelper(context: Context) :
         return docList
     }
 
-    fun updateDoc(docid:Int, docname:String, docspec:String, docphone:String, docemail:String, docadress:String, doccity:String ): Boolean {
+    fun updateDoc(
+        docid: Int,
+        docname: String,
+        docspec: String,
+        docphone: String,
+        docemail: String,
+        docadress: String,
+        doccity: String
+    ): Boolean {
         val db = this.writableDatabase
         val cv = ContentValues()
         var result: Boolean = false
@@ -118,7 +126,7 @@ class DocDatabaseHelper(context: Context) :
 
             db.update(TABLE_NAME, cv, "id=" + docid, null)
             result = true
-        } catch(e: java.lang.Exception){
+        } catch (e: java.lang.Exception) {
             result = false
         }
         return result

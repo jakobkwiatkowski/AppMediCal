@@ -14,7 +14,6 @@ import java.util.*
 
 class AddMedActivity : AppCompatActivity() {
 
-
     private lateinit var edNazwa: EditText
     private lateinit var edDawka: EditText
     private lateinit var edData: TextView
@@ -22,11 +21,8 @@ class AddMedActivity : AppCompatActivity() {
     private lateinit var edGodzina: TextView
     private lateinit var edZapas: TextView
     private lateinit var edKoniec: TextView
-
     private lateinit var btnAdd: Button
     private lateinit var btnBack: Button
-
-
     private lateinit var sqliteHelper: MyDataBaseHelper
 
     private var adapter: LekAdapter? = null
@@ -35,9 +31,6 @@ class AddMedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.addmed)
-
-
-
 
         addPrzypomnienie()
         addIle_razy()
@@ -51,12 +44,9 @@ class AddMedActivity : AppCompatActivity() {
 
         btnAdd.setOnClickListener { addLek() }
 
-
     }
 
-
     private fun addPrzypomnienie() {
-
 
         val rezultat = findViewById<TextView>(R.id.koniec_leku)
         val spinner5: Spinner = findViewById(R.id.przypomnij)
@@ -86,9 +76,7 @@ class AddMedActivity : AppCompatActivity() {
         }
     }
 
-
     private fun addIle_razy() {
-
 
         val rezultat = findViewById<TextView>(R.id.ile_razy)
         val spinner3: Spinner = findViewById(R.id.ile)
@@ -109,8 +97,6 @@ class AddMedActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-
-
     }
 
 
@@ -127,7 +113,6 @@ class AddMedActivity : AppCompatActivity() {
                 kalendarz.set(Calendar.MONTH, month)
                 kalendarz.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 wybierzdate.text = SimpleDateFormat("dd-MM-yyy").format(kalendarz.time)
-
             }
             DatePickerDialog(
                 this,
@@ -137,9 +122,7 @@ class AddMedActivity : AppCompatActivity() {
                 kalendarz.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
-
     }
-
 
     private fun addDatakoniec() {
 
@@ -154,7 +137,6 @@ class AddMedActivity : AppCompatActivity() {
                 kalendarz.set(Calendar.MONTH, month)
                 kalendarz.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 koniec.text = SimpleDateFormat("dd-MM-yyy").format(kalendarz.time)
-
             }
             DatePickerDialog(
                 this,
@@ -167,19 +149,13 @@ class AddMedActivity : AppCompatActivity() {
 
     }
 
-
     private fun addCzas() {
 
         val kalendarz = Calendar.getInstance()
-
-        val ilosc = findViewById<TextView>(R.id.ile_razy).toString()
-
-
         val wybierzczas: TextView = findViewById(R.id.wybierzgodzine)
         val lista = mutableListOf<String>()
 
         var godzina = ""
-
 
         val kiedy2: Button = findViewById(R.id.czas)
 
@@ -203,12 +179,9 @@ class AddMedActivity : AppCompatActivity() {
                 true
             ).show()
         }
-
-
     }
 
     private fun addLek() {
-
 
         val nazwa = edNazwa.text.toString()
         val dawka = edDawka.text.toString()
@@ -229,8 +202,6 @@ class AddMedActivity : AppCompatActivity() {
                 ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec
             )
 
-
-
             val status = sqliteHelper.addLek(lek)
 
             if (status > -1) {
@@ -242,13 +213,11 @@ class AddMedActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-
             } else {
                 Toast.makeText(this, "Nie dodano leku", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
 
     private fun initView() {
         edNazwa = findViewById(R.id.nazwa_leku)
@@ -261,9 +230,7 @@ class AddMedActivity : AppCompatActivity() {
         edKoniec = findViewById(R.id.koniec_leku)
         btnAdd = findViewById(R.id.zapisz)
         btnBack = findViewById(R.id.listaleki)
-
     }
-
 
     fun goListaLek() {
         val addBack = findViewById<Button>(R.id.listaleki)
@@ -271,22 +238,18 @@ class AddMedActivity : AppCompatActivity() {
             val intent = Intent(this, MedListActivity::class.java)
             startActivity(intent)
         }
-
     }
-
 
     fun alarm(godzina: String, nazwa: String) {
 
         val alarm1 = findViewById<ImageView>(R.id.alarmbtn)
         val alarm2 = findViewById<ImageView>(R.id.alarmbtn2)
         val alarm3 = findViewById<ImageView>(R.id.alarmbtn3)
-
         val hourNum = godzina?.filter { it == ',' }?.count()
 
         if (hourNum == 0) {
 
             alarm1.setOnClickListener {
-
                 val h = godzina?.substring(0, 2)?.toInt()
                 val m = godzina?.substring(3, 5)?.toInt()
                 val intent = Intent(AlarmClock.ACTION_SET_ALARM)
@@ -302,10 +265,7 @@ class AddMedActivity : AppCompatActivity() {
             }
 
         } else if (hourNum == 1) {
-
-
             alarm1.setOnClickListener {
-
                 val h = godzina?.substring(0, 2)?.toInt()
                 val m = godzina?.substring(3, 5)?.toInt()
                 val intent = Intent(AlarmClock.ACTION_SET_ALARM)
@@ -319,7 +279,6 @@ class AddMedActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
 
             alarm2.setOnClickListener {
                 val h2 = godzina?.substring(7, 9)?.toInt()
@@ -336,11 +295,8 @@ class AddMedActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
 
         } else if (hourNum == 2) {
-
-
             alarm1.setOnClickListener {
 
                 val h = godzina?.substring(0, 2)?.toInt()
@@ -357,7 +313,6 @@ class AddMedActivity : AppCompatActivity() {
                 ).show()
             }
 
-
             alarm2.setOnClickListener {
                 val h2 = godzina?.substring(7, 9)?.toInt()
                 val m2 = godzina?.substring(10, 12)?.toInt()
@@ -373,7 +328,6 @@ class AddMedActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
 
             alarm3.setOnClickListener {
                 val h3 = godzina?.substring(14, 16)?.toInt()
@@ -390,9 +344,7 @@ class AddMedActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
         }
-
     }
 }
 

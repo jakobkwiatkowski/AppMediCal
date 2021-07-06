@@ -1,7 +1,6 @@
 package edu.ib.medical
 
 class DocModel(
-
     var id: Int,
     var name: String,
     var spec: String,

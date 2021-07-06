@@ -4,7 +4,6 @@ import android.widget.SpinnerAdapter
 import android.widget.Spinner
 
 class LekModel(
-
     var id: Int,
     var nazwa: String,
     var dawka: String,

@@ -19,6 +19,7 @@ class MyDataBaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) { //tworzenie tabeli
 
     val ctx = context
+
     companion object {
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "Leki.db"
@@ -55,7 +56,6 @@ class MyDataBaseHelper(context: Context) :
         val db: SQLiteDatabase = this.writableDatabase
         val cv = ContentValues()
 
-
         cv.put(NazwaLeku, lek.nazwa)
         cv.put(Dawka, lek.dawka)
         cv.put(DataRozpoczecia, lek.data)
@@ -73,29 +73,28 @@ class MyDataBaseHelper(context: Context) :
 
     private fun addEvent(nazwa: String, zapas: String, koniec: String) {
 
-        val day = zapas.substring(0,2).toInt()
-        val month = zapas.substring(3,5).toInt()
-        val year = zapas.substring(6,10).toInt()
+        val day = zapas.substring(0, 2).toInt()
+        val month = zapas.substring(3, 5).toInt()
+        val year = zapas.substring(6, 10).toInt()
         var evDate = Calendar.getInstance()
 
 
-        val days = koniec.substring(0,1).toInt()
-        evDate.set(year, month, day, 0, 0,0)
+        val days = koniec.substring(0, 1).toInt()
+        evDate.set(year, month, day, 0, 0, 0)
 
         val endDate = evDate.timeInMillis
-        val sttime = evDate.timeInMillis - (2678400000 + 1000*60*60*24*days)
+        val sttime = evDate.timeInMillis - (2678400000 + 1000 * 60 * 60 * 24 * days)
 
         val intent = Intent(Intent.ACTION_INSERT)
         intent.setData(CalendarContract.Events.CONTENT_URI)
         intent.putExtra(CalendarContract.Events.TITLE, "$nazwa")
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,  sttime)
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, sttime)
         intent.putExtra(CalendarContract.Events.ALL_DAY, true)
         //intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, sttime+1000*60*60)
         intent.putExtra(CalendarContract.Events.DESCRIPTION, "Uzupełnij zapas leku $nazwa")
 
         startActivity(ctx, intent, null)
     }
-
 
     fun getAllLeki(): ArrayList<LekModel> {
 
@@ -153,13 +152,9 @@ class MyDataBaseHelper(context: Context) :
     }
 
     fun getAllLeki2(): ArrayList<LekModel> {
-
-
-
         val lekList: ArrayList<LekModel> = ArrayList()
         val selectQuery = "SELECT * FROM $TABLE_NAME"
         val db = this.readableDatabase
-
         val cursor: Cursor?
 
         try {
@@ -181,8 +176,8 @@ class MyDataBaseHelper(context: Context) :
         var koniec: String
 
         val kalendarz: Calendar = Calendar.getInstance()
-        val format: SimpleDateFormat =  SimpleDateFormat("dd-MM-yyyy")
-        val today= format.format(kalendarz.getTime())
+        val format: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val today = format.format(kalendarz.getTime())
         if (cursor.moveToFirst()) {
 
             do {
@@ -206,24 +201,23 @@ class MyDataBaseHelper(context: Context) :
                     koniec = koniec
                 )
 
-                if(data <= today && data <= zapas) {
+                if (data <= today && data <= zapas) {
                     lekList.add(lek)
 
                 }
-
-
-            }while (cursor.moveToNext())
+            } while (cursor.moveToNext())
         }
         return lekList
     }
 
-
-    fun updateLek(lekid:Int, leknazwa:String, lekdawka:String, lekdata:String,
-    lekile:String, lekgodzina:String, lekzapas:String, lekkoniec:String): Boolean {
+    fun updateLek(
+        lekid: Int, leknazwa: String, lekdawka: String, lekdata: String,
+        lekile: String, lekgodzina: String, lekzapas: String, lekkoniec: String
+    ): Boolean {
 
         val db = this.writableDatabase
         val cv = ContentValues()
-        var result:Boolean = false
+        var result: Boolean = false
 
         cv.put(NazwaLeku, leknazwa)
         cv.put(Dawka, lekdawka)
@@ -236,7 +230,7 @@ class MyDataBaseHelper(context: Context) :
         try {
             db.update(TABLE_NAME, cv, "id=" + lekid, null)
             result = true
-        }catch(e: java.lang.Exception){
+        } catch (e: java.lang.Exception) {
             result = false
         }
         return result
@@ -245,8 +239,8 @@ class MyDataBaseHelper(context: Context) :
 
     fun deleteLekById(id: Int): Int {
         val db = this.writableDatabase
-
         val cv = ContentValues()
+
         cv.put(ID, id)
 
         val success = db.delete(TABLE_NAME, "id=$id", null)

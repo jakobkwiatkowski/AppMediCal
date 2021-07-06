@@ -10,7 +10,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class UserDatabase(context: Context): SQLiteOpenHelper(context, NAME, null, VERSION) { //tworzenie tabeli
+class UserDatabase(context: Context) :
+    SQLiteOpenHelper(context, NAME, null, VERSION) { //tworzenie tabeli
 
     companion object {
         private const val VERSION = 1
@@ -43,7 +44,6 @@ class UserDatabase(context: Context): SQLiteOpenHelper(context, NAME, null, VERS
     }
 
     fun getUser(): String {
-
         var user = ""
         val selectQuery = "SELECT * FROM $TabName"
         val db = this.readableDatabase
@@ -58,9 +58,7 @@ class UserDatabase(context: Context): SQLiteOpenHelper(context, NAME, null, VERS
             return user
         }
 
-
         if (cursor.moveToFirst()) {
-
             do {
                 user = cursor.getString(cursor.getColumnIndex("user"))
 
@@ -68,7 +66,6 @@ class UserDatabase(context: Context): SQLiteOpenHelper(context, NAME, null, VERS
         }
         return user
     }
-
 }
 
 
