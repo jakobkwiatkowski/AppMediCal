@@ -1,21 +1,20 @@
 package edu.ib.medical
 
-import android.content.DialogInterface
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
-
 class MainActivity : AppCompatActivity() {
 
-    companion object {lateinit var sqliteHelper: MyDataBaseHelper}
+    companion object {
+        lateinit var sqliteHelper: MyDataBaseHelper
+        lateinit var mysqliteHelper: UserDatabase
+    }
 
     private lateinit var recyclerView: RecyclerView
     private var adapter: medAdapter? = null
@@ -27,7 +26,11 @@ class MainActivity : AppCompatActivity() {
         goMenu()
         goAddMed()
         addData()
-        addUserName()
+
+
+        mysqliteHelper = UserDatabase(this)
+        goaddUserName()
+        displayUserName()
 
         sqliteHelper = MyDataBaseHelper(this)
         initView()
@@ -40,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = medAdapter(this)
-            recyclerView.adapter = adapter
+        recyclerView.adapter = adapter
 
     }
 
@@ -53,8 +56,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val medlist = sqliteHelper.getAllLeki2()
-            adapter?.addItems(medlist)
-
+        adapter?.addItems(medlist)
 
 
     }
@@ -67,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun goAddMed(){
+    private fun goAddMed() {
         val addMedButton = findViewById<Button>(R.id.addMedButton2)
         addMedButton.setOnClickListener {
             val intent = Intent(this, AddMedActivity::class.java)
@@ -75,44 +77,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun addData(){
+    private fun addData() {
 
         val data: TextView = findViewById(R.id.Data)
         val kalendarz: Calendar = Calendar.getInstance()
-        val format: SimpleDateFormat =  SimpleDateFormat("dd-MM-yyyy")
+        val format: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
         val wyswietl = format.format(kalendarz.getTime())
         data.setText(wyswietl)
     }
 
-    fun addUserName(){
-
-        var username = findViewById<TextView>(R.id.username)
-        val btnUser = findViewById<ImageButton>(R.id.user)
-        btnUser.setOnClickListener {
 
 
-            val inflater: LayoutInflater = LayoutInflater.from(this)
-            val view: View = inflater.inflate(R.layout.username, null)
+    fun goaddUserName() {
 
-            val editusername: EditText = view.findViewById(R.id.editusername)
-
+        val editbtn = findViewById<ImageButton>(R.id.user)
 
 
-            val builder = AlertDialog.Builder(this)
-                .setTitle("Wprowadź nazwę użytkownika")
-                .setView(view)
-                .setPositiveButton("Zapisz", DialogInterface.OnClickListener { dialog, which ->
+        editbtn.setOnClickListener {
+            val intent = Intent(this, User::class.java)
+            startActivity(intent)
 
-                    username.text = editusername.text.toString()
-
-                    Toast.makeText(this, "Nazwa została wprowadzona", Toast.LENGTH_SHORT).show()
-
-                }).setNegativeButton("Zamknij", DialogInterface.OnClickListener { dialog, which ->
-                })
-        val alert = builder.create()
-           alert.show()
 
         }
+
+
+    }
+
+
+
+    fun displayUserName(){
+        val name = findViewById<TextView>(R.id.username)
+
+        val rezultat = mysqliteHelper.getUser()
+        name.text = rezultat
+
 
     }
 

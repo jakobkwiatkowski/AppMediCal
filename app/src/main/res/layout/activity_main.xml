@@ -7,40 +7,37 @@
     tools:context=".MainActivity">
 
 
-
-
     <TextView
         android:id="@+id/Data"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="92dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginTop="102dp"
         android:fontFamily="casual"
-        android:textColor="#000"
-        android:textStyle="bold"
         android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="18sp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/username2"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="Nazwa użytkownika"
-        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="65dp"
         android:fontFamily="monospace"
-        android:textColor="#000"
+        android:gravity="center"
+        android:text="Nazwa użytkownika:"
+        android:textColor="#03a9f4"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.697"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.013" />
+        app:layout_constraintVertical_bias="0.014" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -80,14 +77,14 @@
         android:id="@+id/leki"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="125dp"
+        android:fontFamily="monospace"
         android:gravity="center"
         android:text="Leki do przyjęcia:"
-        android:textStyle="bold"
-        android:fontFamily="monospace"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="20sp"
         android:textColor="#03a9f4"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -105,11 +102,26 @@
         android:id="@+id/user"
         android:layout_width="25dp"
         android:layout_height="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <TextView
+        android:id="@+id/username"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="Name"
+        android:textColor="#03a9f4"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="130dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

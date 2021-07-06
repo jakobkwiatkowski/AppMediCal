@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MediCal">
+        <activity android:name=".User"></activity>
         <activity
             android:name=".AddMedActivity"
             android:parentActivityName=".MedListActivity"></activity>
@@ -20,7 +21,6 @@
             android:parentActivityName=".DocListActivity"></activity>
         <activity android:name=".DocListActivity" />
         <activity android:name=".TestResultsActivity" />
-        <activity android:name=".GenerateReport" />
         <activity android:name=".MedListActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">

@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.AlarmClock
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -284,6 +285,44 @@ class AddMedActivity : AppCompatActivity() {
             val intent = Intent(this, MedListActivity::class.java)
             startActivity(intent)
         }
+
+    }
+
+
+    fun alarm(godzina: String, nazwa: String) {
+
+        //val tablica....
+
+        val hourNum = godzina?.filter { it == ',' }?.count()
+
+        if (hourNum == 0) {
+            val h = godzina?.substring(0, 2)?.toInt()
+            val m = godzina?.substring(3, 5)?.toInt()
+            val intent = Intent(AlarmClock.ACTION_SET_ALARM)
+            intent.putExtra(AlarmClock.EXTRA_HOUR, h)
+            intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
+
+
+        } else if (hourNum == 1) {
+
+            val h = godzina?.substring(0, 2)?.toInt()
+            val m = godzina?.substring(3, 5)?.toInt()
+            val intent = Intent(AlarmClock.ACTION_SET_ALARM)
+            intent.putExtra(AlarmClock.EXTRA_HOUR, h)
+            intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
+
+
+            val h2 = godzina?.substring(7, 9)?.toInt()
+            val m2 = godzina?.substring(10, 12)?.toInt()
+            val intent2 = Intent(AlarmClock.ACTION_SET_ALARM)
+            intent2.putExtra(AlarmClock.EXTRA_HOUR, h2)
+            intent2.putExtra(AlarmClock.EXTRA_MINUTES, m2)
+            intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 2)")
+
+        }
+
 
     }
 
