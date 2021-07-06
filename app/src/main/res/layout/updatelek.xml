@@ -43,12 +43,12 @@
 
     <Button
         android:id="@+id/zapasbtnedit"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="177dp"
+        android:layout_height="60dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="445dp"
         android:background="@drawable/btn_color"
-        android:text="Data zakończenia"
+        android:text="Do kiedy wystarczy leku?"
         app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -66,19 +66,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/wybierzgodzineedit"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="300dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/border"
         android:gravity="center"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/textVieww3"
@@ -133,8 +133,8 @@
         android:id="@+id/czasedit"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="290dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginEnd="276dp"
         android:background="@drawable/btn_color"
         android:text="Wybierz godziny"
         app:backgroundTint="@null"

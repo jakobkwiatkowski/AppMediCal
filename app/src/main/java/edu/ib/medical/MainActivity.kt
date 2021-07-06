@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
+
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -87,11 +88,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     fun goaddUserName() {
 
         val editbtn = findViewById<ImageButton>(R.id.user)
-
 
         editbtn.setOnClickListener {
             val intent = Intent(this, User::class.java)
@@ -104,8 +103,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    fun displayUserName(){
+    fun displayUserName() {
         val name = findViewById<TextView>(R.id.username)
 
         val rezultat = mysqliteHelper.getUser()
