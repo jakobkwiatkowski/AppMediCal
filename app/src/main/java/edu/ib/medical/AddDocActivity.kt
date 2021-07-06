@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
+
 
 class AddDocActivity : AppCompatActivity() {
    private lateinit var edName: EditText
@@ -63,7 +63,6 @@ class AddDocActivity : AppCompatActivity() {
 
                  if (status > -1) {
                      Toast.makeText(this, "Dodano lekarza!", Toast.LENGTH_SHORT).show()
-                     clearEditText()
                      backBtn.setOnClickListener {
                          val intent = Intent(this, DocListActivity::class.java)
                          startActivity(intent)
@@ -79,15 +78,6 @@ class AddDocActivity : AppCompatActivity() {
 
 
 
-
-   private fun clearEditText() {
-        edName.setText("")
-        edSpec.setText("")
-        edPhone.setText("")
-        edEmail.setText("")
-        edAdress.setText("")
-        edCity.setText("")
-    }
 
 
     private fun goListaDoc() {

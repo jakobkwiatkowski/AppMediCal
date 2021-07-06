@@ -52,7 +52,6 @@ class AddMedActivity : AppCompatActivity() {
         btnAdd.setOnClickListener { addLek() }
 
 
-
     }
 
 
@@ -113,7 +112,6 @@ class AddMedActivity : AppCompatActivity() {
 
 
     }
-
 
 
     private fun addTermin() {
@@ -231,12 +229,14 @@ class AddMedActivity : AppCompatActivity() {
                 ileRazy = ileRazy, godzina = godzina, zapas = zapas, koniec = koniec
             )
 
+
+
             val status = sqliteHelper.addLek(lek)
 
             if (status > -1) {
                 Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show()
+                alarm(godzina, nazwa)
 
-                clearEditText()
                 btnBack.setOnClickListener {
                     val intent = Intent(this, MedListActivity::class.java)
                     startActivity(intent)
@@ -247,19 +247,6 @@ class AddMedActivity : AppCompatActivity() {
                 Toast.makeText(this, "Nie dodano leku", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-
-    private fun clearEditText() {
-        edNazwa.setText("")
-        edDawka.setText("")
-        edData.setText("")
-        edIleRazy.setText("")
-        edGodzina.setText("")
-
-        edZapas.setText("")
-        edKoniec.setText("")
-        edNazwa.requestFocus()
     }
 
 
@@ -288,126 +275,125 @@ class AddMedActivity : AppCompatActivity() {
     }
 
 
+    fun alarm(godzina: String, nazwa: String) {
+
+        val alarm1 = findViewById<ImageView>(R.id.alarmbtn)
+        val alarm2 = findViewById<ImageView>(R.id.alarmbtn2)
+        val alarm3 = findViewById<ImageView>(R.id.alarmbtn3)
+
+        val hourNum = godzina?.filter { it == ',' }?.count()
+
+        if (hourNum == 0) {
+
+            alarm1.setOnClickListener {
+
+                val h = godzina?.substring(0, 2)?.toInt()
+                val m = godzina?.substring(3, 5)?.toInt()
+                val intent = Intent(AlarmClock.ACTION_SET_ALARM)
+                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+                intent.putExtra(AlarmClock.EXTRA_HOUR, h)
+                intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
+                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
+                startActivity(intent)
+                Toast.makeText(
+                    this, "Ustawiono alarm na godzinę $h:$m dla $nazwa",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        } else if (hourNum == 1) {
 
 
+            alarm1.setOnClickListener {
 
-//    fun alarm(godzina: String, nazwa: String) {
-//
-//        val alarm1 = findViewById<ImageButton>(R.id.alarmbtn)
-//        val alarm2 = findViewById<ImageButton>(R.id.alarmbtn2)
-//        val alarm3 = findViewById<ImageButton>(R.id.alarmbtn3)
-//
-//        val hourNum = godzina?.filter { it == ',' }?.count()
-//
-//        if (hourNum == 0) {
-//
-//            alarm1.setOnClickListener {
-//
-//                val h = godzina?.substring(0, 2)?.toInt()
-//                val m = godzina?.substring(3, 5)?.toInt()
-//                val intent = Intent(AlarmClock.ACTION_SET_ALARM)
-//                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
-//                intent.putExtra(AlarmClock.EXTRA_HOUR, h)
-//                intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
-//                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
-//                startActivity(intent)
-//                Toast.makeText(this, "Ustawiono alarm na godzinę $h:$m dla $nazwa",
-//                    Toast.LENGTH_SHORT).show()
-//            }
-//
-//
-//        } else if (hourNum == 1) {
-//
-//
-//
-//            alarm1.setOnClickListener {
-//
-//                val h = godzina?.substring(0, 2)?.toInt()
-//                val m = godzina?.substring(3, 5)?.toInt()
-//                val intent = Intent(AlarmClock.ACTION_SET_ALARM)
-//                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
-//                intent.putExtra(AlarmClock.EXTRA_HOUR, h)
-//                intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
-//                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
-//                startActivity(intent)
-//                Toast.makeText(this, "Ustawiono alarm na godzinę $h:$m dla $nazwa",
-//                    Toast.LENGTH_SHORT).show()
-//            }
-//
-//
-//            alarm2.setOnClickListener {
-//                val h2 = godzina?.substring(7, 9)?.toInt()
-//                val m2 = godzina?.substring(10, 12)?.toInt()
-//                val intent2 = Intent(AlarmClock.ACTION_SET_ALARM)
-//                intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
-//                intent2.putExtra(AlarmClock.EXTRA_HOUR, h2)
-//                intent2.putExtra(AlarmClock.EXTRA_MINUTES, m2)
-//                intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 2)")
-//                startActivity(intent2)
-//                Toast.makeText(
-//                    this,
-//                    "Ustawiono alarm na godzinę  $h2:$m2 dla $nazwa",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//
-//
-//        } else if (hourNum == 2) {
-//
-//
-//            alarm1.setOnClickListener {
-//
-//                val h = godzina?.substring(0, 2)?.toInt()
-//                val m = godzina?.substring(3, 5)?.toInt()
-//                val intent = Intent(AlarmClock.ACTION_SET_ALARM)
-//                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
-//                intent.putExtra(AlarmClock.EXTRA_HOUR, h)
-//                intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
-//                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
-//                startActivity(intent)
-//                Toast.makeText(
-//                    this, "Ustawiono alarm na godzinę $h:$m dla $nazwa",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//
-//
-//            alarm2.setOnClickListener {
-//                val h2 = godzina?.substring(7, 9)?.toInt()
-//                val m2 = godzina?.substring(10, 12)?.toInt()
-//                val intent2 = Intent(AlarmClock.ACTION_SET_ALARM)
-//                intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
-//                intent2.putExtra(AlarmClock.EXTRA_HOUR, h2)
-//                intent2.putExtra(AlarmClock.EXTRA_MINUTES, m2)
-//                intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 2)")
-//                startActivity(intent2)
-//                Toast.makeText(
-//                    this,
-//                    "Ustawiono alarm na godzinę  $h2:$m2 dla $nazwa",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//
-//
-//            alarm3.setOnClickListener {
-//                val h3 = godzina?.substring(14, 16)?.toInt()
-//                val m3 = godzina?.substring(17, 19)?.toInt()
-//                val intent2 = Intent(AlarmClock.ACTION_SET_ALARM)
-//                intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
-//                intent2.putExtra(AlarmClock.EXTRA_HOUR, h3)
-//                intent2.putExtra(AlarmClock.EXTRA_MINUTES, m3)
-//                intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 2)")
-//                startActivity(intent2)
-//                Toast.makeText(
-//                    this,
-//                    "Ustawiono alarm na godzinę  $h3:$m3 dla $nazwa",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//
-//        }
-//
-//    }
+                val h = godzina?.substring(0, 2)?.toInt()
+                val m = godzina?.substring(3, 5)?.toInt()
+                val intent = Intent(AlarmClock.ACTION_SET_ALARM)
+                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+                intent.putExtra(AlarmClock.EXTRA_HOUR, h)
+                intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
+                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
+                startActivity(intent)
+                Toast.makeText(
+                    this, "Ustawiono alarm na godzinę $h:$m dla $nazwa",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+
+            alarm2.setOnClickListener {
+                val h2 = godzina?.substring(7, 9)?.toInt()
+                val m2 = godzina?.substring(10, 12)?.toInt()
+                val intent2 = Intent(AlarmClock.ACTION_SET_ALARM)
+                intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+                intent2.putExtra(AlarmClock.EXTRA_HOUR, h2)
+                intent2.putExtra(AlarmClock.EXTRA_MINUTES, m2)
+                intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 2)")
+                startActivity(intent2)
+                Toast.makeText(
+                    this,
+                    "Ustawiono alarm na godzinę  $h2:$m2 dla $nazwa",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+
+        } else if (hourNum == 2) {
+
+
+            alarm1.setOnClickListener {
+
+                val h = godzina?.substring(0, 2)?.toInt()
+                val m = godzina?.substring(3, 5)?.toInt()
+                val intent = Intent(AlarmClock.ACTION_SET_ALARM)
+                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+                intent.putExtra(AlarmClock.EXTRA_HOUR, h)
+                intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
+                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
+                startActivity(intent)
+                Toast.makeText(
+                    this, "Ustawiono alarm na godzinę $h:$m dla $nazwa",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+
+            alarm2.setOnClickListener {
+                val h2 = godzina?.substring(7, 9)?.toInt()
+                val m2 = godzina?.substring(10, 12)?.toInt()
+                val intent2 = Intent(AlarmClock.ACTION_SET_ALARM)
+                intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+                intent2.putExtra(AlarmClock.EXTRA_HOUR, h2)
+                intent2.putExtra(AlarmClock.EXTRA_MINUTES, m2)
+                intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 2)")
+                startActivity(intent2)
+                Toast.makeText(
+                    this,
+                    "Ustawiono alarm na godzinę  $h2:$m2 dla $nazwa",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+
+            alarm3.setOnClickListener {
+                val h3 = godzina?.substring(14, 16)?.toInt()
+                val m3 = godzina?.substring(17, 19)?.toInt()
+                val intent2 = Intent(AlarmClock.ACTION_SET_ALARM)
+                intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+                intent2.putExtra(AlarmClock.EXTRA_HOUR, h3)
+                intent2.putExtra(AlarmClock.EXTRA_MINUTES, m3)
+                intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 2)")
+                startActivity(intent2)
+                Toast.makeText(
+                    this,
+                    "Ustawiono alarm na godzinę  $h3:$m3 dla $nazwa",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        }
+
+    }
 }
 
 
