@@ -1,11 +1,13 @@
 package edu.ib.medical
 
+import android.app.PendingIntent
 import android.content.ContentValues
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
+import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.widget.TextView
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -14,6 +16,7 @@ import kotlin.collections.ArrayList
 class MyDataBaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) { //tworzenie tabeli
 
+    val ctx = context
     companion object {
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "Leki.db"
@@ -60,9 +63,13 @@ class MyDataBaseHelper(context: Context) :
         cv.put(KoniecLeku, lek.koniec)
 
         val succes = db.insert(TABLE_NAME, null, cv)
+
         db.close()
         return succes
     }
+
+
+
 
     fun getAllLeki(): ArrayList<LekModel> {
 
@@ -207,11 +214,7 @@ class MyDataBaseHelper(context: Context) :
             result = false
         }
         return result
-
-
     }
-
-
 
 
     fun deleteLekById(id: Int): Int {
@@ -223,9 +226,7 @@ class MyDataBaseHelper(context: Context) :
         val success = db.delete(TABLE_NAME, "id=$id", null)
         db.close()
         return success
-
     }
-
 }
 
 

@@ -11,7 +11,7 @@
         android:layout_width="135dp"
         android:layout_height="39dp"
         android:layout_marginTop="72dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="115dp"
         android:layout_height="40dp"
         android:layout_marginTop="450dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/border"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -35,7 +35,7 @@
         android:layout_width="135dp"
         android:layout_height="39dp"
         android:layout_marginTop="120dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
         android:id="@+id/koniecbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="445dp"
         android:background="@drawable/btn_color"
         android:text="Data zakończenia"
@@ -69,7 +69,7 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="130dp"
         android:text="Dawka:"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -92,7 +92,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="80dp"
         android:text="Nazwa leku:"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -112,15 +112,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-
     <Button
         android:id="@+id/terminbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="168dp"
-        android:text="Data rozpoczęcia"
         android:background="@drawable/btn_color"
+        android:text="Data rozpoczęcia"
         app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -130,11 +129,11 @@
         android:layout_width="115dp"
         android:layout_height="40dp"
         android:layout_marginTop="176dp"
-        android:layout_marginEnd="16dp"
-        android:textSize="16sp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/border"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,20 +141,20 @@
         android:id="@+id/czas"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="290dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="292dp"
         android:background="@drawable/btn_color"
         android:text="Wybierz godziny"
         app:backgroundTint="@null"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/przypomnij"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_width="210dp"
+        android:layout_height="35dp"
         android:layout_marginTop="510dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -182,10 +181,10 @@
 
     <Spinner
         android:id="@+id/ile"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_width="159dp"
+        android:layout_height="32dp"
         android:layout_marginTop="240dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -193,7 +192,7 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="240dp"
         android:text="Ile razy dziennie:"
         android:textSize="18sp"
@@ -204,7 +203,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="510dp"
         android:text="Przypomnij:"
         android:textSize="18sp"
@@ -227,13 +226,13 @@
         android:id="@+id/wybierzgodzine"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_marginStart="56dp"
         android:layout_marginTop="300dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/border"
         android:gravity="center"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
