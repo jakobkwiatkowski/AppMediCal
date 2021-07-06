@@ -23,12 +23,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="66dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.269"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/userim" />
+
     <TextView
         android:id="@+id/username2"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="72dp"
+        android:layout_marginRight="84dp"
         android:fontFamily="monospace"
         android:gravity="center"
         android:text="Nazwa użytkownika:"
@@ -39,22 +50,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.004" />
 
-    <ImageButton
-        android:id="@+id/user"
-        android:layout_width="25dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="44dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:layout_marginEnd="136dp"
+        android:layout_marginEnd="148dp"
         android:fontFamily="monospace"
         android:gravity="center"
         android:text="Name"
@@ -64,16 +65,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="66dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="16dp"
+    <ImageButton
+        android:id="@+id/user"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.31"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/userim" />
+        app:srcCompat="@android:drawable/arrow_down_float" />
 
     <Button
         android:id="@+id/addMedButton2"
