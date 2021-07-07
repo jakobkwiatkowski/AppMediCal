@@ -160,25 +160,26 @@ class AddMedActivity : AppCompatActivity() {
         val kiedy2: Button = findViewById(R.id.czas)
 
 
-        kiedy2.setOnClickListener {
-            val dpd2 = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            kiedy2.setOnClickListener {
+                val dpd2 = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
 
-                kalendarz.set(Calendar.HOUR_OF_DAY, hour)
-                kalendarz.set(Calendar.MINUTE, minute)
+                    kalendarz.set(Calendar.HOUR_OF_DAY, hour)
+                    kalendarz.set(Calendar.MINUTE, minute)
 
-                godzina = SimpleDateFormat("HH:mm").format(kalendarz.time)
-                lista.add(godzina)
-                wybierzczas.text = (lista.toString().replace("[", "").replace("]", ""))
+                    godzina = SimpleDateFormat("HH:mm").format(kalendarz.time)
+                        lista.add(godzina)
+                    wybierzczas.text = (lista.toString().replace("[", "").replace("]", ""))
+                    }
+
+                TimePickerDialog(
+                    this,
+                    dpd2,
+                    kalendarz.get(Calendar.HOUR_OF_DAY),
+                    kalendarz.get(Calendar.MINUTE),
+                    true
+                ).show()
             }
 
-            TimePickerDialog(
-                this,
-                dpd2,
-                kalendarz.get(Calendar.HOUR_OF_DAY),
-                kalendarz.get(Calendar.MINUTE),
-                true
-            ).show()
-        }
     }
 
     private fun addLek() {
@@ -272,7 +273,7 @@ class AddMedActivity : AppCompatActivity() {
                 intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
                 intent.putExtra(AlarmClock.EXTRA_HOUR, h)
                 intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
-                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
+                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 1)")
                 startActivity(intent)
                 Toast.makeText(
                     this, "Ustawiono alarm na godzinę $h:$m dla $nazwa",
@@ -305,7 +306,7 @@ class AddMedActivity : AppCompatActivity() {
                 intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
                 intent.putExtra(AlarmClock.EXTRA_HOUR, h)
                 intent.putExtra(AlarmClock.EXTRA_MINUTES, m)
-                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa")
+                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 1)")
                 startActivity(intent)
                 Toast.makeText(
                     this, "Ustawiono alarm na godzinę $h:$m dla $nazwa",
@@ -336,7 +337,7 @@ class AddMedActivity : AppCompatActivity() {
                 intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
                 intent2.putExtra(AlarmClock.EXTRA_HOUR, h3)
                 intent2.putExtra(AlarmClock.EXTRA_MINUTES, m3)
-                intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 2)")
+                intent2.putExtra(AlarmClock.EXTRA_MESSAGE, "Weź lek $nazwa (dawka 3)")
                 startActivity(intent2)
                 Toast.makeText(
                     this,
